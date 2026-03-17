@@ -36,5 +36,5 @@ https://github.com/user-attachments/assets/c01522f1-c009-4838-ae89-0eee8b549402
 
 https://github.com/user-attachments/assets/0e3b59fd-055d-4016-86d0-f57c2e425746
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/WyD9BeFFTw0?si=pLWq_WeLOKgNlxwI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+[![Dungeon Ambience](https://img.youtube.com/vi/WyD9BeFFTw0/0.jpg)](https://www.youtube.com/watch?v=WyD9BeFFTw0)
 
