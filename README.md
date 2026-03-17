@@ -7,6 +7,7 @@
 
 ## Une description écrite de la proposition
 - il poura interagir avec son environement
+- des spike qui tombe sur ciel
 ### sont but final sera de reussir a finir le parkour jusqua la fin
 - il aura un certain nombre de temps imparti
 - un certain nombre de vie
