@@ -1,7 +1,7 @@
 # realiter_mixte_tp3
 
 ## Un résumé en une phrase
-### Un prisonnier pris dans une prison dois reussir a s'échaper a laide, 
+### Un prisonnier pris dans un donjon dois reussir a s'échaper a laide, 
 
 
 ## Une description écrite de la proposition
