@@ -10,6 +10,6 @@
 - il aura un certain nombre de temps imparti
 - un certain nombre de vie
 
-## Moodboard visuek
+## Moodboard visuel
 <img width="1920" height="1080" alt="Plan de travail 1" src="https://github.com/user-attachments/assets/6810cf83-faba-46d7-a86d-e9dd5ac7ea65" />
 
