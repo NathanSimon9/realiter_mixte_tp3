@@ -40,3 +40,10 @@ https://github.com/user-attachments/assets/0e3b59fd-055d-4016-86d0-f57c2e425746
 
 [![Dungeon Ambience](https://img.youtube.com/vi/WyD9BeFFTw0/0.jpg)](https://www.youtube.com/watch?v=WyD9BeFFTw0)
 
+
+
+## Un schéma d'interactivité
+<img width="1147" height="1308" alt="Tp3 drawio" src="https://github.com/user-attachments/assets/d72094cd-2903-4f13-be01-e5cbc092cfd5" />
+
+
+
