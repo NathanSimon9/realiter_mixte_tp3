@@ -6,6 +6,7 @@ TagManager:
   tags:
   - scie
   - grinder_simple
+  - grinder_triple
   layers:
   - Default
   - TransparentFX
