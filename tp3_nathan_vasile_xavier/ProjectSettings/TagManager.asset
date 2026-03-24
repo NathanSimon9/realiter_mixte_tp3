@@ -6,6 +6,9 @@ TagManager:
   tags:
   - scie
   - grinder_simple
+  - grinder_triple
+  - roof_spike
+  - sol_spike
   layers:
   - Default
   - TransparentFX
