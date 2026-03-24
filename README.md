@@ -50,6 +50,10 @@ https://github.com/user-attachments/assets/0e3b59fd-055d-4016-86d0-f57c2e425746
 
 <img width="16249" height="7495" alt="carte_rm_pr3" src="https://github.com/user-attachments/assets/25a5d39c-25c0-4351-b77c-1858116c3fba" />
 
+## Tâche
+
+<img width="1920" height="1080" alt="Untitled-1" src="https://github.com/user-attachments/assets/b8609a7b-625f-4cbe-b31d-d281461ea5f2" />
+
 
 
 
