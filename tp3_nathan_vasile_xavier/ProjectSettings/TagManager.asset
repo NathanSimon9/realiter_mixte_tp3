@@ -9,6 +9,8 @@ TagManager:
   - grinder_triple
   - roof_spike
   - sol_spike
+  - detection_sol_spike
+  - axe_swing
   layers:
   - Default
   - TransparentFX
