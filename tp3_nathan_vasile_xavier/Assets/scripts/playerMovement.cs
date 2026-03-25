@@ -20,6 +20,8 @@ public class playerMovement : MonoBehaviour
     private bool isGrounded;
     private int nbVertes = 0;
     private int nbRouges = 0;
+    public int limiteRouge = 3;
+    public int limiteVerte = 2;
 
     // Update is called once per frame
     void Update()
