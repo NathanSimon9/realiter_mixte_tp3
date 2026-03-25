@@ -1554,11 +1554,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 399512520}
+    m_TransformParent: {fileID: 644979043}
     m_Modifications:
     - target: {fileID: 122520, guid: 085bcf27a35c8de46bc8c5c3deeb6cd5, type: 3}
       propertyPath: m_Name
       value: SD_Prop_Potion_02 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 122520, guid: 085bcf27a35c8de46bc8c5c3deeb6cd5, type: 3}
+      propertyPath: m_TagString
+      value: green
       objectReference: {fileID: 0}
     - target: {fileID: 468172, guid: 085bcf27a35c8de46bc8c5c3deeb6cd5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8347,14 +8351,7 @@ Transform:
   - {fileID: 1323378124}
   - {fileID: 1516863627}
   - {fileID: 1521070094}
-  - {fileID: 632307989}
-  - {fileID: 71543192}
-  - {fileID: 478843871}
-  - {fileID: 1872100739}
-  - {fileID: 1011069490}
-  - {fileID: 462448689}
-  - {fileID: 1532303154}
-  - {fileID: 619642231}
+  - {fileID: 644979043}
   - {fileID: 755867931}
   - {fileID: 2048810269}
   - {fileID: 250629598}
@@ -9264,11 +9261,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 399512520}
+    m_TransformParent: {fileID: 644979043}
     m_Modifications:
     - target: {fileID: 122520, guid: 085bcf27a35c8de46bc8c5c3deeb6cd5, type: 3}
       propertyPath: m_Name
       value: SD_Prop_Potion_02 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 122520, guid: 085bcf27a35c8de46bc8c5c3deeb6cd5, type: 3}
+      propertyPath: m_TagString
+      value: green
       objectReference: {fileID: 0}
     - target: {fileID: 468172, guid: 085bcf27a35c8de46bc8c5c3deeb6cd5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9633,11 +9634,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 399512520}
+    m_TransformParent: {fileID: 644979043}
     m_Modifications:
     - target: {fileID: 130644, guid: 3172cd7c4bb1c844480cf63cbddbba08, type: 3}
       propertyPath: m_Name
       value: SD_Prop_Potion_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 130644, guid: 3172cd7c4bb1c844480cf63cbddbba08, type: 3}
+      propertyPath: m_TagString
+      value: red
       objectReference: {fileID: 0}
     - target: {fileID: 463970, guid: 3172cd7c4bb1c844480cf63cbddbba08, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11867,11 +11872,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 399512520}
+    m_TransformParent: {fileID: 644979043}
     m_Modifications:
     - target: {fileID: 130644, guid: 3172cd7c4bb1c844480cf63cbddbba08, type: 3}
       propertyPath: m_Name
       value: SD_Prop_Potion_01 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 130644, guid: 3172cd7c4bb1c844480cf63cbddbba08, type: 3}
+      propertyPath: m_TagString
+      value: red
       objectReference: {fileID: 0}
     - target: {fileID: 463970, guid: 3172cd7c4bb1c844480cf63cbddbba08, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11997,11 +12006,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 399512520}
+    m_TransformParent: {fileID: 644979043}
     m_Modifications:
     - target: {fileID: 122520, guid: 085bcf27a35c8de46bc8c5c3deeb6cd5, type: 3}
       propertyPath: m_Name
       value: SD_Prop_Potion_02 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 122520, guid: 085bcf27a35c8de46bc8c5c3deeb6cd5, type: 3}
+      propertyPath: m_TagString
+      value: green
       objectReference: {fileID: 0}
     - target: {fileID: 468172, guid: 085bcf27a35c8de46bc8c5c3deeb6cd5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12387,6 +12400,45 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 126936, guid: 44cb508f9183cc148844499a64b64ba1, type: 3}
   m_PrefabInstance: {fileID: 1377136415}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &644979042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 644979043}
+  m_Layer: 0
+  m_Name: Potion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &644979043
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644979042}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 632307989}
+  - {fileID: 71543192}
+  - {fileID: 478843871}
+  - {fileID: 1872100739}
+  - {fileID: 1011069490}
+  - {fileID: 462448689}
+  - {fileID: 1532303154}
+  - {fileID: 619642231}
+  m_Father: {fileID: 399512520}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &646102704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19707,11 +19759,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 399512520}
+    m_TransformParent: {fileID: 644979043}
     m_Modifications:
     - target: {fileID: 122520, guid: 085bcf27a35c8de46bc8c5c3deeb6cd5, type: 3}
       propertyPath: m_Name
       value: SD_Prop_Potion_02 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 122520, guid: 085bcf27a35c8de46bc8c5c3deeb6cd5, type: 3}
+      propertyPath: m_TagString
+      value: green
       objectReference: {fileID: 0}
     - target: {fileID: 468172, guid: 085bcf27a35c8de46bc8c5c3deeb6cd5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -31034,11 +31090,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 399512520}
+    m_TransformParent: {fileID: 644979043}
     m_Modifications:
     - target: {fileID: 130644, guid: 3172cd7c4bb1c844480cf63cbddbba08, type: 3}
       propertyPath: m_Name
       value: SD_Prop_Potion_01 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 130644, guid: 3172cd7c4bb1c844480cf63cbddbba08, type: 3}
+      propertyPath: m_TagString
+      value: red
       objectReference: {fileID: 0}
     - target: {fileID: 463970, guid: 3172cd7c4bb1c844480cf63cbddbba08, type: 3}
       propertyPath: m_LocalPosition.x
@@ -39238,11 +39298,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 399512520}
+    m_TransformParent: {fileID: 644979043}
     m_Modifications:
     - target: {fileID: 130644, guid: 3172cd7c4bb1c844480cf63cbddbba08, type: 3}
       propertyPath: m_Name
       value: SD_Prop_Potion_01 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 130644, guid: 3172cd7c4bb1c844480cf63cbddbba08, type: 3}
+      propertyPath: m_TagString
+      value: red
       objectReference: {fileID: 0}
     - target: {fileID: 463970, guid: 3172cd7c4bb1c844480cf63cbddbba08, type: 3}
       propertyPath: m_LocalPosition.x

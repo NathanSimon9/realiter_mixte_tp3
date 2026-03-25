@@ -11,6 +11,8 @@ TagManager:
   - sol_spike
   - detection_sol_spike
   - axe_swing
+  - red
+  - green
   layers:
   - Default
   - TransparentFX
