@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playerMovement : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class playerMovement : MonoBehaviour
     public int limiteRouge = 4;
     public int limiteVerte = 4;
     public GameObject chaudron;
+    public GameObject panelChaudron;
 
     // Update is called once per frame
     void Update()
