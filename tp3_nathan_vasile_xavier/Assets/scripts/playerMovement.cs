@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEditor.ShaderData;
-
+using UnityEngine.SceneManagement;
 public class playerMovement : MonoBehaviour
 {
 
@@ -99,21 +99,13 @@ public class playerMovement : MonoBehaviour
     // --- CETTE FONCTION DOIT ÊTRE EXACTEMENT COMME ÇA ---
     void VerifierChaudron()
     {
-        // Ce message s'affichera à CHAQUE bouteille ramassée
-        Debug.Log("Vérification : R=" + nbRouges + "/" + limiteRouge + " V=" + nbVertes + "/" + limiteVerte);
-
+        // Si on a récolté 4 rouges et 4 vertes
         if (nbVertes >= limiteVerte && nbRouges >= limiteRouge)
         {
-            Debug.Log("LA CONDITION EST ENFIN VRAIE !");
-            if (chaudron != null)
-            {
-                chaudron.SetActive(true);
-                Debug.Log("Appel de SetActive(true) sur : " + chaudron.name);
-            }
-            else
-            {
-                Debug.LogError("ERREUR : Tu as oublié de glisser le chaudron dans l'inspecteur !");
-            }
+            Debug.Log("Récolte terminée ! Téléportation vers la scène : chaudron");
+
+            // On charge la nouvelle scène par son nom exact
+            SceneManager.LoadScene("Chaudron");
         }
     }
 }

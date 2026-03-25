@@ -17314,6 +17314,22 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.22
       objectReference: {fileID: 0}
+    - target: {fileID: 7193331520151057772, guid: 66a1e7fc89f77a24693c3a89c83576a0, type: 3}
+      propertyPath: chaudron
+      value: 
+      objectReference: {fileID: 1229208905}
+    - target: {fileID: 7193331520151057772, guid: 66a1e7fc89f77a24693c3a89c83576a0, type: 3}
+      propertyPath: texteVertUI
+      value: 
+      objectReference: {fileID: 1492220485}
+    - target: {fileID: 7193331520151057772, guid: 66a1e7fc89f77a24693c3a89c83576a0, type: 3}
+      propertyPath: texteRougeUI
+      value: 
+      objectReference: {fileID: 1274562981}
+    - target: {fileID: 7193331520151057772, guid: 66a1e7fc89f77a24693c3a89c83576a0, type: 3}
+      propertyPath: panelChaudron
+      value: 
+      objectReference: {fileID: 1412312373}
     - target: {fileID: 7244215754441633648, guid: 66a1e7fc89f77a24693c3a89c83576a0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.8
