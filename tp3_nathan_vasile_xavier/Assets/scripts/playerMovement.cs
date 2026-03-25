@@ -59,53 +59,34 @@ public class playerMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     
     }
-   
+
     private void OnTriggerEnter(Collider other)
     {
-        // --- 1. COLLECTE DES BOUTEILLES ---
         if (other.CompareTag("green") && nbVertes < limiteVerte)
         {
             nbVertes++;
-            Debug.Log("VERTE RÉCUPÉRÉE ! Total: " + nbVertes + "/" + limiteVerte);
+            Debug.Log("Verte ramassée !");
             Destroy(other.gameObject);
-            VerifierChaudron(); // On appelle la vérification
+            VerifierChaudron();
         }
 
         if (other.CompareTag("red") && nbRouges < limiteRouge)
         {
             nbRouges++;
-            Debug.Log("ROUGE RÉCUPÉRÉE ! Total: " + nbRouges + "/" + limiteRouge);
+            Debug.Log("Rouge ramassée !");
             Destroy(other.gameObject);
-            VerifierChaudron(); // On appelle la vérification
-        }
-
-        // --- 2. DÉTECTION DU CHAUDRON ---
-        if (other.CompareTag("chaudron"))
-        {
-            // Si le chaudron est apparu (donc actif), on affiche le message
-            if (chaudron != null && chaudron.activeSelf)
-            {
-                Debug.Log("COLLISION CHAUDRON : Le chaudron est prêt !");
-                // On peut quand même activer le panel ici si tu veux juste voir s'il s'affiche
-                if (panelChaudron != null) panelChaudron.SetActive(true);
-            }
-            else
-            {
-                Debug.Log("Le chaudron est là, mais il manque des bouteilles.");
-            }
+            VerifierChaudron();
         }
     }
 
-    // --- CETTE FONCTION DOIT ÊTRE EXACTEMENT COMME ÇA ---
     void VerifierChaudron()
     {
-        // Si on a récolté 4 rouges et 4 vertes
+        // Si le total est de 8 (4+4)
         if (nbVertes >= limiteVerte && nbRouges >= limiteRouge)
         {
-            Debug.Log("Récolte terminée ! Téléportation vers la scène : chaudron");
-
-            // On charge la nouvelle scène par son nom exact
-            SceneManager.LoadScene("Chaudron");
+            Debug.Log("Direction la scène Chaudron !");
+            SceneManager.LoadScene("Chaudron"); // <-- MAJUSCULE ICI
         }
     }
 }
+
