@@ -13,6 +13,7 @@ TagManager:
   - axe_swing
   - red
   - green
+  - chaudron
   layers:
   - Default
   - TransparentFX

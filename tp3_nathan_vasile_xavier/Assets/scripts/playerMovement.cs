@@ -20,8 +20,9 @@ public class playerMovement : MonoBehaviour
     private bool isGrounded;
     private int nbVertes = 0;
     private int nbRouges = 0;
-    public int limiteRouge = 3;
-    public int limiteVerte = 2;
+    public int limiteRouge = 4;
+    public int limiteVerte = 4;
+    public GameObject chaudron;
 
     // Update is called once per frame
     void Update()
@@ -49,30 +50,47 @@ public class playerMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     
     }
-
     private void OnTriggerEnter(Collider other)
     {
-        // On vérifie le tag ET si on n'a pas encore atteint la limite
+        // 1. Les bouteilles
         if (other.CompareTag("green") && nbVertes < limiteVerte)
         {
             nbVertes++;
-            Debug.Log("Bouteille verte récupérée ! Total : " + nbVertes + "/" + limiteVerte);
+            Debug.Log("Verte: " + nbVertes + "/" + limiteVerte);
             Destroy(other.gameObject);
-
-            if (nbVertes == limiteVerte)
-            {
-                Debug.Log("Limite de bouteilles VERTES atteinte.");
-            }
+            VerifierChaudron(); // On vérifie si on doit activer le chaudron
         }
         else if (other.CompareTag("red") && nbRouges < limiteRouge)
         {
             nbRouges++;
-            Debug.Log("Bouteille rouge récupérée ! Total : " + nbRouges + "/" + limiteRouge);
+            Debug.Log("Rouge: " + nbRouges + "/" + limiteRouge);
             Destroy(other.gameObject);
+            VerifierChaudron(); // On vérifie si on doit activer le chaudron
+        }
 
-            if (nbRouges == limiteRouge)
+        // 2. Le Chaudron (S'exécute seulement si l'objet touché a le tag "chaudron")
+        else if (other.CompareTag("chaudron"))
+        {
+            if (nbVertes >= limiteVerte && nbRouges >= limiteRouge)
             {
-                Debug.Log("Limite de bouteilles ROUGES atteinte.");
+                Debug.Log("Chaudron détecté ! La potion est prête.");
+            }
+            else
+            {
+                Debug.Log("Le chaudron est là, mais il vous manque des bouteilles !");
+            }
+        }
+    }
+
+    void VerifierChaudron()
+    {
+        // Cette fonction active le chaudron dans la scène dès que le score est atteint
+        if (nbVertes >= limiteVerte && nbRouges >= limiteRouge)
+        {
+            if (chaudron != null)
+            {
+                chaudron.SetActive(true);
+                Debug.Log("Le chaudron est maintenant actif dans la hiérarchie !");
             }
         }
     }
