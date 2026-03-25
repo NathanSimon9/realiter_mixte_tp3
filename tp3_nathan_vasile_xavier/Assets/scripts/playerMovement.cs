@@ -17,7 +17,9 @@ public class playerMovement : MonoBehaviour
     public LayerMask groundMask; 
 
     private Vector3 velocity;
-    private bool isGrounded; 
+    private bool isGrounded;
+    private int nbVertes = 0;
+    private int nbRouges = 0;
 
     // Update is called once per frame
     void Update()
@@ -44,5 +46,32 @@ public class playerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // On vérifie le tag ET si on n'a pas encore atteint la limite
+        if (other.CompareTag("green") && nbVertes < limiteVerte)
+        {
+            nbVertes++;
+            Debug.Log("Bouteille verte récupérée ! Total : " + nbVertes + "/" + limiteVerte);
+            Destroy(other.gameObject);
+
+            if (nbVertes == limiteVerte)
+            {
+                Debug.Log("Limite de bouteilles VERTES atteinte.");
+            }
+        }
+        else if (other.CompareTag("red") && nbRouges < limiteRouge)
+        {
+            nbRouges++;
+            Debug.Log("Bouteille rouge récupérée ! Total : " + nbRouges + "/" + limiteRouge);
+            Destroy(other.gameObject);
+
+            if (nbRouges == limiteRouge)
+            {
+                Debug.Log("Limite de bouteilles ROUGES atteinte.");
+            }
+        }
     }
 }
