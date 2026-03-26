@@ -32,6 +32,17 @@ public class playerMovement : MonoBehaviour
 
     public TextMeshProUGUI texteRougeUI;
     public TextMeshProUGUI texteVertUI;
+    public static Vector3 dernierePosition;
+
+
+    void Start()
+    {
+        // Si on revient de la scène Chaudron, on se replace au bon endroit
+        if (dernierePosition != Vector3.zero)
+        {
+            transform.position = dernierePosition;
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -81,11 +92,11 @@ public class playerMovement : MonoBehaviour
 
     void VerifierChaudron()
     {
-        // Si le total est de 8 (4+4)
         if (nbVertes >= limiteVerte && nbRouges >= limiteRouge)
         {
-            Debug.Log("Direction la scène Chaudron !");
-            SceneManager.LoadScene("Chaudron"); // <-- MAJUSCULE ICI
+            // On enregistre la position juste avant de partir
+            dernierePosition = transform.position;
+            SceneManager.LoadScene("Chaudron");
         }
     }
 }

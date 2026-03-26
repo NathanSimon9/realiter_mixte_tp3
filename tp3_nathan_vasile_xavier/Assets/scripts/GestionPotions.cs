@@ -1,108 +1,81 @@
 using UnityEngine;
-using TMPro; // Obligatoire pour utiliser TextMeshPro
-using UnityEngine.UI; // Obligatoire pour interagir avec les Boutons
+using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement; // Obligatoire pour changer de scène
 
 public class GestionPotions : MonoBehaviour
 {
-    [Header("--- Configuration des Textes (UI) ---")]
-    [Tooltip("Glisse l'objet 'Codepotion' ici")]
+    [Header("--- UI Textes ---")]
     public TextMeshProUGUI texteCodePotion;
-
-    [Tooltip("Glisse l'objet 'TexteRougesPossedees' ici")]
     public TextMeshProUGUI texteCompteurRouges;
-
-    [Tooltip("Glisse l'objet 'TexteVertesPossedees' ici")]
     public TextMeshProUGUI texteCompteurVertes;
 
-    [Header("--- Configuration des Boutons (UI) ---")]
-    [Tooltip("Glisse l'objet 'Redbutton' ici")]
-    public Button boutonRouge;
+    [Header("--- Configuration du Code ---")]
+    public string codeVictoire = "RVRRV"; // La recette exacte
+    public string sceneRetour = "scene_donjon"; // Nom de ta scène de combat
 
-    [Tooltip("Glisse l'objet 'GreenButton' ici")]
-    public Button boutonVert;
-
-    [Header("--- Inventaire de départ ---")]
-    // Comme on vient de changer de scène, on redonne manuellement les 4 bouteilles
     private int nbRouges = 4;
     private int nbVertes = 4;
 
     void Start()
     {
-        // 1. Initialisation : On s'assure que le texte du code est vide au début
-        if (texteCodePotion != null)
-            texteCodePotion.text = "";
-
-        // 2. Initialisation : On affiche '4' dans les compteurs
+        texteCodePotion.text = "";
         MettreAJourInterface();
     }
 
-    // --- FONCTION POUR LE BOUTON ROUGE (Redbutton) ---
-    // Cette fonction doit être liée à l'événement OnClick du Redbutton dans l'inspecteur
     public void ActionBoutonRouge()
     {
-        // On vérifie s'il reste des bouteilles rouges
         if (nbRouges > 0)
         {
-            // 1. Diminue le stock
             nbRouges--;
-
-            // 2. Ajoute 'R' à la fin du texte existant (de gauche à droite)
             texteCodePotion.text = texteCodePotion.text + "R";
-
-            // 3. Met à jour les textes affichés
             MettreAJourInterface();
-
-            // Debug pour vérifier dans la console
-            Debug.Log("Rouge ajoutée. Code actuel : " + texteCodePotion.text);
-        }
-        else
-        {
-            Debug.Log("Plus de bouteilles rouges disponibles !");
-            // Optionnel : jouer un son d'erreur ici
+            VerifierCombinaison(); // On vérifie après chaque ajout
         }
     }
 
-    // --- FONCTION POUR LE BOUTON VERT (GreenButton) ---
-    // Cette fonction doit être liée à l'événement OnClick du GreenButton dans l'inspecteur
     public void ActionBoutonVert()
     {
-        // On vérifie s'il reste des bouteilles vertes
         if (nbVertes > 0)
         {
-            // 1. Diminue le stock
             nbVertes--;
-
-            // 2. Ajoute 'V' à la fin du texte existant (de gauche à droite)
             texteCodePotion.text = texteCodePotion.text + "V";
-
-            // 3. Met à jour les textes affichés
             MettreAJourInterface();
-
-            // Debug pour vérifier dans la console
-            Debug.Log("Verte ajoutée. Code actuel : " + texteCodePotion.text);
-        }
-        else
-        {
-            Debug.Log("Plus de bouteilles vertes disponibles !");
+            VerifierCombinaison(); // On vérifie après chaque ajout
         }
     }
 
-    // Fonction outil pour rafraîchir tous les textes de l'interface
+    void VerifierCombinaison()
+    {
+        // Si le texte écrit est EXACTEMENT RVRRV
+        if (texteCodePotion.text == codeVictoire)
+        {
+            Debug.Log("POTION RÉUSSIE ! Retour au donjon...");
+
+            // On charge la scène du donjon
+            SceneManager.LoadScene(sceneRetour);
+        }
+        else if (texteCodePotion.text.Length >= codeVictoire.Length)
+        {
+            // Si on a tapé assez de lettres mais que c'est faux
+            Debug.Log("Mauvaise recette... Réinitialisation !");
+            ResetPotion();
+        }
+    }
+
+    void ResetPotion()
+    {
+        texteCodePotion.text = "";
+        nbRouges = 4;
+        nbVertes = 4;
+        MettreAJourInterface();
+        // On remet les boutons cliquables
+        GetComponentInChildren<Canvas>().GetComponentInChildren<GraphicRaycaster>().enabled = true;
+    }
+
     void MettreAJourInterface()
     {
-        // Mise à jour des compteurs numériques
-        if (texteCompteurRouges != null)
-            texteCompteurRouges.text = "Rouges : " + nbRouges;
-
-        if (texteCompteurVertes != null)
-            texteCompteurVertes.text = "Vertes : " + nbVertes;
-
-        // --- GESTION DE L'INTERACTIVITÉ DES BOUTONS ---
-        // Si le stock tombe à 0, on rend le bouton gris et non-cliquable
-        if (nbRouges <= 0 && boutonRouge != null)
-            boutonRouge.interactable = false;
-
-        if (nbVertes <= 0 && boutonVert != null)
-            boutonVert.interactable = false;
+        texteCompteurRouges.text = "Rouges : " + nbRouges;
+        texteCompteurVertes.text = "Vertes : " + nbVertes;
     }
 }
