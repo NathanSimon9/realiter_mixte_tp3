@@ -99,13 +99,12 @@ public class GestionPotions : MonoBehaviour
     IEnumerator SequenceVictoire()
     {
         enAttente = true;
+        Debug.Log("REUSSI"); // Message console demandé
 
-        // ON AJOUTE CETTE LIGNE ICI :
-        GestionDonnees.potionsRecoltees = true;
+        // ON ACTIVE LA CLÉ DANS LA MÉMOIRE ICI
+        GestionDonnees.codeCouleurReussi = true;
 
-        if (texteCodePotion != null) texteCodePotion.gameObject.SetActive(false);
-        if (textereussite != null) textereussite.SetActive(true);
-
+        // ... (le reste de ton code actuel : activer texte réussite, attendre 2s)
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(sceneRetour);
     }
@@ -113,14 +112,10 @@ public class GestionPotions : MonoBehaviour
     IEnumerator SequenceEchec()
     {
         enAttente = true;
-        Debug.Log("[POTION] Lancement SequenceEchec. Attente 5s...");
+        Debug.Log("FAIL"); // Message console demandé
 
-        if (texteCodePotion != null) texteCodePotion.gameObject.SetActive(false);
-        if (texteechec != null) texteechec.SetActive(true);
-
+        // ... (le reste de ton code actuel : activer texte échec, attendre 5s)
         yield return new WaitForSeconds(5f);
-
-        Debug.Log("[POTION] Retour scène : " + sceneRetour);
         SceneManager.LoadScene(sceneRetour);
     }
 

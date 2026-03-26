@@ -1,5 +1,5 @@
 public static class GestionDonnees
 {
-    // Cette variable reste en mémoire entre les scènes
     public static bool potionsRecoltees = false;
+    public static bool codeCouleurReussi = false; // Ajoute cette ligne
 }

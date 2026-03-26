@@ -8,6 +8,6 @@ public class CheckPotions : MonoBehaviour
         if (GestionDonnees.potionsRecoltees == true)
         {
             Destroy(gameObject);
-        }
+                 }
     }
 }
