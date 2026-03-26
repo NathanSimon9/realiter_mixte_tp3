@@ -9,8 +9,8 @@ using static UnityEditor.ShaderData;
 using UnityEngine.SceneManagement;
 public class playerMovement : MonoBehaviour
 {
-
-    public CharacterController controller;
+    [Header("--- UI Donjon ---")]
+      public CharacterController controller;
 
     public float speed = 12f;
 
@@ -28,8 +28,6 @@ public class playerMovement : MonoBehaviour
     public int limiteRouge = 4;
     public int limiteVerte = 4;
     public GameObject chaudron;
-    public GameObject panelChaudron;
-
     public TextMeshProUGUI texteRougeUI;
     public TextMeshProUGUI texteVertUI;
     public static Vector3 dernierePosition;
@@ -42,6 +40,7 @@ public class playerMovement : MonoBehaviour
         {
             transform.position = dernierePosition;
         }
+        MettreAJourInterfaceDonjon();
     }
 
     // Update is called once per frame
@@ -71,20 +70,24 @@ public class playerMovement : MonoBehaviour
     
     }
 
+   
     private void OnTriggerEnter(Collider other)
     {
-        // Ramasser les bouteilles (On ne téléporte PAS ici)
+        // Ramasser les bouteilles VERTES
         if (other.CompareTag("green") && nbVertes < limiteVerte)
         {
             nbVertes++;
-            Debug.Log("Verte ramassée !");
+            Debug.Log("Verte ramassée ! UI mise à jour.");
+            MettreAJourInterfaceDonjon(); // <-- AJOUTÉ
             Destroy(other.gameObject);
         }
 
+        // Ramasser les bouteilles ROUGES
         if (other.CompareTag("red") && nbRouges < limiteRouge)
         {
             nbRouges++;
-            Debug.Log("Rouge ramassée !");
+            Debug.Log("Rouge ramassée ! UI mise à jour.");
+            MettreAJourInterfaceDonjon(); // <-- AJOUTÉ
             Destroy(other.gameObject);
         }
 
@@ -94,7 +97,6 @@ public class playerMovement : MonoBehaviour
             VerifierChaudron();
         }
     }
-
     void VerifierChaudron()
     {
         // On vérifie si on a bien tout avant de partir
@@ -108,5 +110,14 @@ public class playerMovement : MonoBehaviour
             Debug.Log("Il te manque des bouteilles pour utiliser le chaudron !");
         }
     }
-}
+        void MettreAJourInterfaceDonjon()
+        {
+            // On vérifie si les cases sont remplies dans l'inspecteur
+            if (texteRougeUI != null) texteRougeUI.text = "x " + nbRouges;
+            if (texteVertUI != null) texteVertUI.text = "x " + nbVertes;
+        }
+
+    }
+
+
 
