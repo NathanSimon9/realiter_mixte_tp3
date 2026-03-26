@@ -96,18 +96,17 @@ public class GestionPotions : MonoBehaviour
             StartCoroutine(SequenceEchec());
         }
     }
-
     IEnumerator SequenceVictoire()
     {
         enAttente = true;
-        Debug.Log("[POTION] Lancement SequenceVictoire. Attente 2s...");
+
+        // ON AJOUTE CETTE LIGNE ICI :
+        GestionDonnees.potionsRecoltees = true;
 
         if (texteCodePotion != null) texteCodePotion.gameObject.SetActive(false);
         if (textereussite != null) textereussite.SetActive(true);
 
         yield return new WaitForSeconds(2f);
-
-        Debug.Log("[POTION] Chargement scène : " + sceneRetour);
         SceneManager.LoadScene(sceneRetour);
     }
 
