@@ -73,12 +73,12 @@ public class playerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // Ramasser les bouteilles (On ne téléporte PAS ici)
         if (other.CompareTag("green") && nbVertes < limiteVerte)
         {
             nbVertes++;
             Debug.Log("Verte ramassée !");
             Destroy(other.gameObject);
-            VerifierChaudron();
         }
 
         if (other.CompareTag("red") && nbRouges < limiteRouge)
@@ -86,17 +86,26 @@ public class playerMovement : MonoBehaviour
             nbRouges++;
             Debug.Log("Rouge ramassée !");
             Destroy(other.gameObject);
+        }
+
+        // Téléporter SEULEMENT si on touche le chaudron
+        if (other.CompareTag("chaudron"))
+        {
             VerifierChaudron();
         }
     }
 
     void VerifierChaudron()
     {
+        // On vérifie si on a bien tout avant de partir
         if (nbVertes >= limiteVerte && nbRouges >= limiteRouge)
         {
-            // On enregistre la position juste avant de partir
             dernierePosition = transform.position;
             SceneManager.LoadScene("Chaudron");
+        }
+        else
+        {
+            Debug.Log("Il te manque des bouteilles pour utiliser le chaudron !");
         }
     }
 }

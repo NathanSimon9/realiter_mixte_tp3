@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Chaudron.unity
     guid: a246013196f2fa04187d5372fd49ed4d
+  - enabled: 1
+    path: Assets/Scenes/scene_donjon.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 9b431498bce680741b5fbe271195e63f, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 7e7e80663fe11de42bf35297f3b9c875, type: 2}
