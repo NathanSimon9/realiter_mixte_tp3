@@ -15,6 +15,7 @@ TagManager:
   - green
   - chaudron
   - key
+  - levier
   layers:
   - Default
   - TransparentFX
