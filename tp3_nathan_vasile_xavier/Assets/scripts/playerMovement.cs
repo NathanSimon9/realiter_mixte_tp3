@@ -23,27 +23,10 @@ public class playerMovement : MonoBehaviour
 
     private Vector3 velocity;
     private bool isGrounded;
-    private int nbVertes = 0;
-    private int nbRouges = 0;
-    public int limiteRouge = 4;
-    public int limiteVerte = 4;
-    public GameObject chaudron;
-    public TextMeshProUGUI texteRougeUI;
-    public TextMeshProUGUI texteVertUI;
-    public static Vector3 dernierePosition;
+  
 
 
-    void Start()
-    {
-        // Si on revient de la scène Chaudron, on se replace au bon endroit
-        if (dernierePosition != Vector3.zero)
-        {
-            transform.position = dernierePosition;
-        }
-        MettreAJourInterfaceDonjon();
-    }
-
-    // Update is called once per frame
+   
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
@@ -69,55 +52,8 @@ public class playerMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     
     }
+}
 
-   
-    private void OnTriggerEnter(Collider other)
-    {
-        // Ramasser les bouteilles VERTES
-        if (other.CompareTag("green") && nbVertes < limiteVerte)
-        {
-            nbVertes++;
-            Debug.Log("Verte ramassée ! UI mise à jour.");
-            MettreAJourInterfaceDonjon(); // <-- AJOUTÉ
-            Destroy(other.gameObject);
-        }
-
-        // Ramasser les bouteilles ROUGES
-        if (other.CompareTag("red") && nbRouges < limiteRouge)
-        {
-            nbRouges++;
-            Debug.Log("Rouge ramassée ! UI mise à jour.");
-            MettreAJourInterfaceDonjon(); // <-- AJOUTÉ
-            Destroy(other.gameObject);
-        }
-
-        // Téléporter SEULEMENT si on touche le chaudron
-        if (other.CompareTag("chaudron"))
-        {
-            VerifierChaudron();
-        }
-    }
-    void VerifierChaudron()
-    {
-        // On vérifie si on a bien tout avant de partir
-        if (nbVertes >= limiteVerte && nbRouges >= limiteRouge)
-        {
-            dernierePosition = transform.position;
-            SceneManager.LoadScene("Chaudron");
-        }
-        else
-        {
-            Debug.Log("Il te manque des bouteilles pour utiliser le chaudron !");
-        }
-    }
-        void MettreAJourInterfaceDonjon()
-        {
-            // On vérifie si les cases sont remplies dans l'inspecteur
-            if (texteRougeUI != null) texteRougeUI.text = "x " + nbRouges;
-            if (texteVertUI != null) texteVertUI.text = "x " + nbVertes;
-        }
-
-    }
 
 
 
