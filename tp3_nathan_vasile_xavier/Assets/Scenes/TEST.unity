@@ -18146,6 +18146,18 @@ PrefabInstance:
       propertyPath: m_InteractionLayers.m_Bits
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 942810691211101373, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_StartingGroupMembers.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 942810691211101373, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_StartingInteractionOverridesMap.Array.data[0].overrideGroupMembers.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1178791450436251564, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_RequestedTrackingOriginMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503725, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_Name
       value: XR Origin (XR Rig)
@@ -18214,6 +18226,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4778211696441940833, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_DirectInteractor
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5663893676086941514, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_DirectInteractor
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5826056641483426609, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -18221,6 +18241,14 @@ PrefabInstance:
     - target: {fileID: 6045481230268494804, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_InteractionLayers.m_Bits
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678509202150728127, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_StartingGroupMembers.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678509202150728127, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_StartingInteractionOverridesMap.Array.data[0].overrideGroupMembers.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -27363,7 +27391,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1115256353}
-  - component: {fileID: 1115256352}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -27371,18 +27398,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1115256352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1115256351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91b0b3c992644a34a97880b662092b6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1115256353
 Transform:
   m_ObjectHideFlags: 0
@@ -29964,9 +29979,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 370980818003556954, guid: d88a5f1b88f2ed147be894a2717c7296, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1208297261}
-    - targetCorrespondingSourceObject: {fileID: 370980818003556954, guid: d88a5f1b88f2ed147be894a2717c7296, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1208297260}
   m_SourcePrefab: {fileID: 100100000, guid: d88a5f1b88f2ed147be894a2717c7296, type: 3}
 --- !u!4 &1208297258 stripped
 Transform:
@@ -29978,18 +29990,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 370980818003556954, guid: d88a5f1b88f2ed147be894a2717c7296, type: 3}
   m_PrefabInstance: {fileID: 1208297257}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1208297260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1208297259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4405e294429fe27449bd8851cd336870, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &1208297261
 Animator:
   serializedVersion: 5
@@ -36627,7 +36627,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1498352655}
-  - component: {fileID: 1498352656}
   m_Layer: 0
   m_Name: Potion
   m_TagString: Untagged
@@ -36658,18 +36657,6 @@ Transform:
   - {fileID: 1511514693}
   m_Father: {fileID: 744138016}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1498352656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1498352654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b107d41ea056bd498df9ba392f50f5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1502637110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42505,6 +42492,10 @@ PrefabInstance:
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_Name
       value: XR Device Simulator
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
