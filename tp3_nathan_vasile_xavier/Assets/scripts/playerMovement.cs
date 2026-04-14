@@ -12,7 +12,7 @@ public class playerMovement : MonoBehaviour
     [Header("--- UI Donjon ---")]
       public CharacterController controller;
 
-    public float speed = 12f;
+    public float speed = 30f;
 
     public float gravity = -9.81f;
     public float jumpHeight = 3f; 
