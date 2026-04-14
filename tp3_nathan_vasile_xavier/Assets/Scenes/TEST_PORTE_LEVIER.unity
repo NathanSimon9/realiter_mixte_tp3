@@ -10455,7 +10455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 170560, guid: e48e29ed31a89bc45a47e31ea282be74, type: 3}
       propertyPath: m_TagString
-      value: chaudron
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 470788, guid: e48e29ed31a89bc45a47e31ea282be74, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10542,7 +10542,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 744138016}
+    m_TransformParent: {fileID: 1611864744}
     m_Modifications:
     - target: {fileID: 101362, guid: 2566a226f1cc41f4b97ed8c024c77e17, type: 3}
       propertyPath: m_Name
@@ -10550,15 +10550,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 440088, guid: 2566a226f1cc41f4b97ed8c024c77e17, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -28.792074
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 440088, guid: 2566a226f1cc41f4b97ed8c024c77e17, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.7785614
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 440088, guid: 2566a226f1cc41f4b97ed8c024c77e17, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 35.660034
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 440088, guid: 2566a226f1cc41f4b97ed8c024c77e17, type: 3}
       propertyPath: m_LocalRotation.w
@@ -18517,7 +18517,7 @@ Transform:
   - {fileID: 957894496}
   - {fileID: 1332026118}
   - {fileID: 542103080}
-  - {fileID: 419228220}
+  - {fileID: 1611864744}
   - {fileID: 884491889}
   - {fileID: 1851794616}
   - {fileID: 1818922040}
@@ -39795,6 +39795,38 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5, y: 0, z: 5}
   m_Center: {x: -2.5, y: 0, z: 2.5}
+--- !u!1 &1611864743
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1611864744}
+  m_Layer: 0
+  m_Name: CHAUDRON
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1611864744
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611864743}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -28.792074, y: 1.7785614, z: 35.66003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 419228220}
+  m_Father: {fileID: 744138016}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1613548712
 PrefabInstance:
   m_ObjectHideFlags: 0
