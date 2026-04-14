@@ -44751,7 +44751,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4405e294429fe27449bd8851cd336870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visuelCle: {fileID: 1813394584}
 --- !u!95 &1813394587
 Animator:
   serializedVersion: 5
@@ -52245,6 +52244,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ActionAssets:
   - {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+--- !u!143 &1411642224812749496 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 6232745470614056090, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+  m_PrefabInstance: {fileID: 3892821899314591421}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2284134202185667120
 Transform:
   m_ObjectHideFlags: 0
@@ -52337,6 +52341,10 @@ PrefabInstance:
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_Name
       value: XR Device Simulator
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -52518,11 +52526,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 6071700700708625251}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91b0b3c992644a34a97880b662092b6d, type: 3}
+  m_Script: {fileID: 11500000, guid: 38ceded0a0807e14e91d0d6fd23e3d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Handle: {fileID: 1801939089}
-  porte_cave: {fileID: 2013409211}
+  controller: {fileID: 1411642224812749496}
+  speed: 12
+  gravity: -9.81
+  jumpHeight: 3
+  groundCheck: {fileID: 1229476472}
+  groundDistance: 0.4
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &7686550532030417565
 GameObject:
   m_ObjectHideFlags: 0
