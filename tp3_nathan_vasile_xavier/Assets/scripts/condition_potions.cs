@@ -3,52 +3,56 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-
 public class condition_potions : MonoBehaviour
 {
     private int[] validation = { 1, 2, 1, 1, 2 };
-    private int bouteillesCount = 0;
-    private bool sequenceTerminee = false; // Empêche de relancer le code après la réussite
-
+    private int bouteillesCount;
+    private bool estDejaOuvert = false;
     private void OnTriggerEnter(Collider other)
     {
-        // Si la porte est déjà ouverte, on ne fait plus rien
-        if (sequenceTerminee) return;
-
-        if (other.CompareTag("red"))
+        if (other.tag == "red")
         {
-            TraiterEntree(1);
-        }
-        else if (other.CompareTag("green"))
-        {
-            TraiterEntree(2);
-        }
-    }
-
-    private void TraiterEntree(int codeCouleur)
-    {
-        if (validation[bouteillesCount] == codeCouleur)
-        {
-            bouteillesCount++;
-            Debug.Log("Étape " + bouteillesCount + " validée !");
-
-            if (bouteillesCount >= validation.Length)
+            if (validation[bouteillesCount] == 1)
             {
-                OuvrirPorte();
+                bouteillesCount++;
+                Debug.Log("RougeOk");
+                VerifierReussite(); // On vérifie si c'était la dernière étape
+            }
+            else
+            {
+                bouteillesCount = 0;
+                Debug.Log("RougePasOk");
             }
         }
-        else
+        else if (other.tag == "green")
         {
-            // Erreur dans la séquence : on réinitialise tout
-            bouteillesCount = 0;
-            Debug.Log("Erreur ! La séquence repart à zéro.");
+            if (validation[bouteillesCount] == 2)
+            {
+                bouteillesCount++;
+                Debug.Log("VertOk");
+                VerifierReussite(); // On vérifie si c'était la dernière étape
+            }
+            else
+            {
+                bouteillesCount = 0;
+                Debug.Log("VertPasOk");
+            }
         }
     }
 
-    private void OuvrirPorte()
+    private void VerifierReussite()
     {
-        sequenceTerminee = true; // Verrouille la réussite
+        // On vérifie si le compte est bon ET si on ne l'a pas déjà fait
+        if (bouteillesCount == validation.Length && !estDejaOuvert)
+        {
+            estDejaOuvert = true; // On verrouille immédiatement
+            Debug.Log("Réussite ! Activation de la portekey.");
+            ActiverAnimationPortekey();
+        }
+    }
 
+    private void ActiverAnimationPortekey()
+    {
         GameObject portekey = GameObject.FindWithTag("portekey");
 
         if (portekey != null)
@@ -56,13 +60,8 @@ public class condition_potions : MonoBehaviour
             Animator anim = portekey.GetComponent<Animator>();
             if (anim != null)
             {
-                // On active le Trigger pour lancer l'animation
+                // Joue l'animation une seule fois
                 anim.SetTrigger("Ouvrir");
-                Debug.Log("Animation de la porte lancée !");
-            }
-            else
-            {
-                Debug.LogWarning("L'objet 'portekey' n'a pas d'Animator !");
             }
         }
     }
