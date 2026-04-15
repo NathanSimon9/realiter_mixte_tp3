@@ -5,11 +5,30 @@ using UnityEngine;
 
 public class condition_potions : MonoBehaviour
 {
+    [System.Serializable]
+    public struct GemPair
+    {
+        public string nomEtape; // Juste pour s'y retrouver dans l'inspecteur
+        public GameObject gemOff;
+        public GameObject gemOn;
+    }
     private int[] validation = { 1, 2, 1, 1, 2 };
     private int bouteillesCount;
     private bool estDejaOuvert = false;
+
+    [Header("Glisse les paires OFF et ON ici")]
+    public GemPair[] pairesDeGems;
+
+    private void Start()
+    {
+        ResetVisuels();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
+
+        if (estDejaOuvert) return;
+
         if (other.tag == "red")
         {
             if (validation[bouteillesCount] == 1)
@@ -39,30 +58,22 @@ public class condition_potions : MonoBehaviour
             }
         }
     }
-
     private void VerifierReussite()
     {
-        // On vérifie si le compte est bon ET si on ne l'a pas déjà fait
         if (bouteillesCount == validation.Length && !estDejaOuvert)
         {
-            estDejaOuvert = true; // On verrouille immédiatement
-            Debug.Log("Réussite ! Activation de la portekey.");
-            ActiverAnimationPortekey();
+            estDejaOuvert = true;
+            Debug.Log("POTIONS REUSSI!");
+            Debug.Log("REUSSITE DES POTIONS!");
         }
     }
-
-    private void ActiverAnimationPortekey()
+    private void ResetVisuels()
     {
-        GameObject portekey = GameObject.FindWithTag("portekey");
-
-        if (portekey != null)
+        bouteillesCount = 0;
+        foreach (GemPair paire in pairesDeGems)
         {
-            Animator anim = portekey.GetComponent<Animator>();
-            if (anim != null)
-            {
-                // Joue l'animation une seule fois
-                anim.SetTrigger("Ouvrir");
-            }
+            if (paire.gemOff != null) paire.gemOff.SetActive(true);
+            if (paire.gemOn != null) paire.gemOn.SetActive(false);
         }
     }
 }
