@@ -3,18 +3,24 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 public class condition_potions : MonoBehaviour
 {
     [System.Serializable]
     public struct GemPair
     {
-        public string nomEtape; // Juste pour s'y retrouver dans l'inspecteur
+        public string nomEtape;
         public GameObject gemOff;
         public GameObject gemOn;
     }
+
     private int[] validation = { 1, 2, 1, 1, 2 };
-    private int bouteillesCount;
+    private int bouteillesCount = 0;
     private bool estDejaOuvert = false;
+
+    // --- SECURITE ---
+    private float prochainTempsAcceptable = 0f;
+    private float delaiSecurite = 3f;
 
     [Header("Glisse les paires OFF et ON ici")]
     public GemPair[] pairesDeGems;
@@ -28,18 +34,19 @@ public class condition_potions : MonoBehaviour
     {
         if (estDejaOuvert) return;
 
-        // On vérifie la couleur rouge
+        // On vérifie si assez de temps s'est écoulé (3 secondes)
+        if (Time.time < prochainTempsAcceptable) return;
+
         if (other.CompareTag("red"))
         {
+            // On définit le prochain moment où on acceptera une bouteille
+            prochainTempsAcceptable = Time.time + delaiSecurite;
             TraiterEntree(1);
-            // Optionnel : on peut détruire la bouteille ou la téléporter pour éviter qu'elle retouche le trigger
-            Destroy(other.gameObject);
         }
-        // On vérifie la couleur verte
         else if (other.CompareTag("green"))
         {
+            prochainTempsAcceptable = Time.time + delaiSecurite;
             TraiterEntree(2);
-            Destroy(other.gameObject);
         }
     }
 
@@ -47,35 +54,32 @@ public class condition_potions : MonoBehaviour
     {
         if (validation[bouteillesCount] == couleur)
         {
-            // --- AMÉLIORATION VISUELLE ---
-            // On allume la gemme AVANT de changer l'index
             pairesDeGems[bouteillesCount].gemOff.SetActive(false);
             pairesDeGems[bouteillesCount].gemOn.SetActive(true);
 
             bouteillesCount++;
-            Debug.Log("Couleur OK ! Étape : " + bouteillesCount);
+            Debug.Log("Bonne bouteille ! Etape : " + bouteillesCount);
 
             VerifierReussite();
         }
         else
         {
-            Debug.Log("Erreur ! Séquence brisée.");
-            ResetVisuels(); // On appelle ta fonction qui remet bouteillesCount à 0
+            Debug.Log("Erreur ! On recommence.");
+            ResetVisuels();
         }
     }
 
-    /* private void OnTriggerEnter(Collider other)
+    /* ANCIEN CODE GARDE EN COMMENTAIRE
+    private void OnTriggerEnter(Collider other)
     {
-
         if (estDejaOuvert) return;
-
         if (other.tag == "red")
         {
             if (validation[bouteillesCount] == 1)
             {
                 bouteillesCount++;
                 Debug.Log("RougeOk");
-                VerifierReussite(); // On vérifie si c'était la dernière étape
+                VerifierReussite();
             }
             else
             {
@@ -89,7 +93,7 @@ public class condition_potions : MonoBehaviour
             {
                 bouteillesCount++;
                 Debug.Log("VertOk");
-                VerifierReussite(); // On vérifie si c'était la dernière étape
+                VerifierReussite();
             }
             else
             {
@@ -97,16 +101,18 @@ public class condition_potions : MonoBehaviour
                 Debug.Log("VertPasOk");
             }
         }
-    }  }  */
+    } 
+    */
+
     private void VerifierReussite()
     {
         if (bouteillesCount == validation.Length && !estDejaOuvert)
         {
             estDejaOuvert = true;
             Debug.Log("POTIONS REUSSI!");
-            Debug.Log("REUSSITE DES POTIONS!");
         }
     }
+
     private void ResetVisuels()
     {
         bouteillesCount = 0;
@@ -116,5 +122,4 @@ public class condition_potions : MonoBehaviour
             if (paire.gemOn != null) paire.gemOn.SetActive(false);
         }
     }
-
 }
