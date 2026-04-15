@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
+
 public class condition_potions : MonoBehaviour
 {
     [System.Serializable]
@@ -18,7 +19,6 @@ public class condition_potions : MonoBehaviour
     private int bouteillesCount = 0;
     private bool estDejaOuvert = false;
 
-    // --- SECURITE ---
     private float prochainTempsAcceptable = 0f;
     private float delaiSecurite = 3f;
 
@@ -33,13 +33,10 @@ public class condition_potions : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (estDejaOuvert) return;
-
-        // On vérifie si assez de temps s'est écoulé (3 secondes)
         if (Time.time < prochainTempsAcceptable) return;
 
         if (other.CompareTag("red"))
         {
-            // On définit le prochain moment où on acceptera une bouteille
             prochainTempsAcceptable = Time.time + delaiSecurite;
             TraiterEntree(1);
         }
@@ -52,61 +49,32 @@ public class condition_potions : MonoBehaviour
 
     private void TraiterEntree(int couleur)
     {
+        // SECURITÉ CRITIQUE : On vérifie si l'index est valide avant de faire quoi que ce soit
+        if (bouteillesCount < 0 || bouteillesCount >= validation.Length) return;
+
         if (validation[bouteillesCount] == couleur)
         {
-            pairesDeGems[bouteillesCount].gemOff.SetActive(false);
-            pairesDeGems[bouteillesCount].gemOn.SetActive(true);
+            // Verifier que l'index existe aussi dans le tableau des gemmes
+            if (bouteillesCount < pairesDeGems.Length)
+            {
+                pairesDeGems[bouteillesCount].gemOff.SetActive(false);
+                pairesDeGems[bouteillesCount].gemOn.SetActive(true);
+            }
 
             bouteillesCount++;
             Debug.Log("Bonne bouteille ! Etape : " + bouteillesCount);
-
             VerifierReussite();
         }
         else
         {
-            Debug.Log("Erreur ! On recommence.");
+            Debug.Log("Erreur ! Séquence réinitialisée.");
             ResetVisuels();
         }
     }
 
-    /* ANCIEN CODE GARDE EN COMMENTAIRE
-    private void OnTriggerEnter(Collider other)
-    {
-        if (estDejaOuvert) return;
-        if (other.tag == "red")
-        {
-            if (validation[bouteillesCount] == 1)
-            {
-                bouteillesCount++;
-                Debug.Log("RougeOk");
-                VerifierReussite();
-            }
-            else
-            {
-                bouteillesCount = 0;
-                Debug.Log("RougePasOk");
-            }
-        }
-        else if (other.tag == "green")
-        {
-            if (validation[bouteillesCount] == 2)
-            {
-                bouteillesCount++;
-                Debug.Log("VertOk");
-                VerifierReussite();
-            }
-            else
-            {
-                bouteillesCount = 0;
-                Debug.Log("VertPasOk");
-            }
-        }
-    } 
-    */
-
     private void VerifierReussite()
     {
-        if (bouteillesCount == validation.Length && !estDejaOuvert)
+        if (bouteillesCount >= validation.Length && !estDejaOuvert)
         {
             estDejaOuvert = true;
             Debug.Log("POTIONS REUSSI!");
@@ -116,6 +84,10 @@ public class condition_potions : MonoBehaviour
     private void ResetVisuels()
     {
         bouteillesCount = 0;
+        // On force un délai de sécurité plus long au reset pour éviter que la 
+        // bouteille qui a causé l'erreur ne re-déclenche le script instantanément
+        prochainTempsAcceptable = Time.time + delaiSecurite;
+
         foreach (GemPair paire in pairesDeGems)
         {
             if (paire.gemOff != null) paire.gemOff.SetActive(true);
