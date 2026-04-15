@@ -20,7 +20,10 @@ public class condition_potions : MonoBehaviour
     private bool estDejaOuvert = false;
 
     private float prochainTempsAcceptable = 0f;
-    private float delaiSecurite = 3f;
+    private float delaiSecurite = 1f;
+
+    [Header("Récompense")]
+    public GameObject objetCle; // Glisse ta clé ici dans l'inspecteur
 
     [Header("Glisse les paires OFF et ON ici")]
     public GemPair[] pairesDeGems;
@@ -28,6 +31,8 @@ public class condition_potions : MonoBehaviour
     private void Start()
     {
         ResetVisuels();
+        // On s'assure que la clé est bien cachée au début
+        if (objetCle != null) objetCle.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -77,7 +82,14 @@ public class condition_potions : MonoBehaviour
         if (bouteillesCount >= validation.Length && !estDejaOuvert)
         {
             estDejaOuvert = true;
-            Debug.Log("POTIONS REUSSI!");
+            Debug.Log("POTIONS REUSSI !");
+
+            // --- LA CLÉ APPARAÎT ICI ---
+            if (objetCle != null)
+            {
+                objetCle.SetActive(true);
+                Debug.Log("La clé est apparue !");
+            }
         }
     }
 
