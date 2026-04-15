@@ -26,6 +26,46 @@ public class condition_potions : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (estDejaOuvert) return;
+
+        // On vérifie la couleur rouge
+        if (other.CompareTag("red"))
+        {
+            TraiterEntree(1);
+            // Optionnel : on peut détruire la bouteille ou la téléporter pour éviter qu'elle retouche le trigger
+            Destroy(other.gameObject);
+        }
+        // On vérifie la couleur verte
+        else if (other.CompareTag("green"))
+        {
+            TraiterEntree(2);
+            Destroy(other.gameObject);
+        }
+    }
+
+    private void TraiterEntree(int couleur)
+    {
+        if (validation[bouteillesCount] == couleur)
+        {
+            // --- AMÉLIORATION VISUELLE ---
+            // On allume la gemme AVANT de changer l'index
+            pairesDeGems[bouteillesCount].gemOff.SetActive(false);
+            pairesDeGems[bouteillesCount].gemOn.SetActive(true);
+
+            bouteillesCount++;
+            Debug.Log("Couleur OK ! Étape : " + bouteillesCount);
+
+            VerifierReussite();
+        }
+        else
+        {
+            Debug.Log("Erreur ! Séquence brisée.");
+            ResetVisuels(); // On appelle ta fonction qui remet bouteillesCount à 0
+        }
+    }
+
+    /* private void OnTriggerEnter(Collider other)
+    {
 
         if (estDejaOuvert) return;
 
@@ -57,7 +97,7 @@ public class condition_potions : MonoBehaviour
                 Debug.Log("VertPasOk");
             }
         }
-    }
+    }  }  */
     private void VerifierReussite()
     {
         if (bouteillesCount == validation.Length && !estDejaOuvert)
@@ -76,4 +116,5 @@ public class condition_potions : MonoBehaviour
             if (paire.gemOn != null) paire.gemOn.SetActive(false);
         }
     }
+
 }
