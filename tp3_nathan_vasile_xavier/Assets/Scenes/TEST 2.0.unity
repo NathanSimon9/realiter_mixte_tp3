@@ -12660,7 +12660,7 @@ Transform:
   m_GameObject: {fileID: 495934827}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.09, y: 0.5, z: 0.04}
+  m_LocalPosition: {x: -0.15, y: 0.64, z: 0.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16853,11 +16853,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 486510, guid: 3c6066f9c68d6e846968372f931bb81c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.146
+      value: 2.177
       objectReference: {fileID: 0}
     - target: {fileID: 486510, guid: 3c6066f9c68d6e846968372f931bb81c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 31.534
+      value: 31.893
       objectReference: {fileID: 0}
     - target: {fileID: 486510, guid: 3c6066f9c68d6e846968372f931bb81c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -16904,6 +16904,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 164722, guid: 3c6066f9c68d6e846968372f931bb81c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 660913913}
+    - targetCorrespondingSourceObject: {fileID: 164722, guid: 3c6066f9c68d6e846968372f931bb81c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 660913915}
   m_SourcePrefab: {fileID: 100100000, guid: 3c6066f9c68d6e846968372f931bb81c, type: 3}
 --- !u!4 &660913911 stripped
 Transform:
@@ -16996,6 +16999,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.89316916, y: 0.7717402, z: 0.51850206}
   m_Center: {x: 0.08783901, y: 0.65152436, z: -0.079293795}
+--- !u!114 &660913915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660913912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab727190f8d62d34cbdb66d7f9193ebc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  porteAnimator: {fileID: 1888434373}
+  triggerOuverture: Porte_clee
 --- !u!1001 &666538906
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48866,7 +48883,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: d723d222b6d81a141b529d83159c70d6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
