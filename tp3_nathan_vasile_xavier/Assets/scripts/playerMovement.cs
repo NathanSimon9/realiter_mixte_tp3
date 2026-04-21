@@ -52,6 +52,44 @@ public class playerMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     
     }
+    public class InteractionJoueur : MonoBehaviour
+    {
+        [Header("Référence de la Trappe")]
+        public Animator trappeAnimator; // Glisse l'objet Trappe_sol_01 ici dans l'inspecteur
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            // 1. On vérifie si l'objet touché a le tag "levier"
+            if (collision.gameObject.CompareTag("levier"))
+            {
+                // 2. On récupère l'Animator du levier pour jouer son animation
+                Animator levierAnim = collision.gameObject.GetComponent<Animator>();
+
+                if (levierAnim != null)
+                {
+                    levierAnim.SetTrigger("PlayAnim");
+                    Debug.Log("Animation du levier lancée !");
+                }
+
+                // 3. On fait jouer l'animation de la trappe
+                if (trappeAnimator != null)
+                {
+                    trappeAnimator.SetTrigger("OuvrirTrappe");
+                    Debug.Log("Animation de la trappe lancée !");
+
+                    // Optionnel : On désactive le collider du levier pour ne pas le réactiver par erreur
+                    if (collision.gameObject.GetComponent<Collider>() != null)
+                    {
+                        collision.gameObject.GetComponent<Collider>().enabled = false;
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Erreur : Glisse l'objet avec le controller Trape_sol_01 dans la case 'Trappe Animator' sur le Joueur !");
+                }
+            }
+        }
+    }
 }
 
 
