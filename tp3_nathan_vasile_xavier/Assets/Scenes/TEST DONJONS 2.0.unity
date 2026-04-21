@@ -10227,8 +10227,9 @@ GameObject:
   - component: {fileID: 368047550}
   - component: {fileID: 368047552}
   - component: {fileID: 368047551}
-  - component: {fileID: 368047553}
   - component: {fileID: 368047555}
+  - component: {fileID: 368047556}
+  - component: {fileID: 368047557}
   m_Layer: 0
   m_Name: Handle
   m_TagString: levier
@@ -10301,27 +10302,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 368047549}
   m_Mesh: {fileID: 4300002, guid: 9781e4c181f16a041984ef35263d324f, type: 3}
---- !u!65 &368047553
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 368047549}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.41406778, y: 0.3249036, z: 0.68368506}
-  m_Center: {x: -0.036014665, y: 0.009325954, z: 0.57363045}
 --- !u!95 &368047555
 Animator:
   serializedVersion: 5
@@ -10343,6 +10323,40 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &368047556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368047549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ef757edd24d48f4fa19b24b23441e75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levierAnimator: {fileID: 368047555}
+--- !u!65 &368047557
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368047549}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.53658956, y: 0.4287811, z: 0.7946531}
+  m_Center: {x: -0.041140433, y: 0.020621268, z: 0.65547806}
 --- !u!1001 &368494646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21378,7 +21392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
