@@ -9997,9 +9997,11 @@ GameObject:
   - component: {fileID: 368047550}
   - component: {fileID: 368047552}
   - component: {fileID: 368047551}
+  - component: {fileID: 368047553}
+  - component: {fileID: 368047554}
   m_Layer: 0
   m_Name: Handle
-  m_TagString: Untagged
+  m_TagString: levier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10013,7 +10015,7 @@ Transform:
   m_GameObject: {fileID: 368047549}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.49885, y: 0.457, z: 0.24822}
+  m_LocalPosition: {x: -0.499, y: 0.348, z: 0.063}
   m_LocalScale: {x: 0.7643, y: 0.7643, z: 0.7643}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10069,6 +10071,48 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 368047549}
   m_Mesh: {fileID: 4300002, guid: 9781e4c181f16a041984ef35263d324f, type: 3}
+--- !u!65 &368047553
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368047549}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.23446852, y: 0.2344656, z: 0.57165635}
+  m_Center: {x: 0.0048933043, y: -0.0000019073486, z: 0.5439793}
+--- !u!95 &368047554
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368047549}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cc93cbedf06595b46bd22d594c2d6d67, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &368494646
 PrefabInstance:
   m_ObjectHideFlags: 0
