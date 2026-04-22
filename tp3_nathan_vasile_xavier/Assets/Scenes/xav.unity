@@ -6715,7 +6715,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 486970, guid: 269e0cd123ae1304e8b9b9d3fcae47eb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.8497877
+      value: -3.603
       objectReference: {fileID: 0}
     - target: {fileID: 486970, guid: 269e0cd123ae1304e8b9b9d3fcae47eb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14211,7 +14211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9129c604372aff84e83a6a4fbc18ef41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationDuLevier: {fileID: 0}
+  animationDuLevier: {fileID: 7400000, guid: 66219f343b8718b43982ce6131b23151, type: 2}
   scriptAnimatorDeLaTrappe: {fileID: 780593495}
   animationDeLaTrappe: {fileID: 7400000, guid: d126b8a1a84f73a40ada38bd4ba875c7, type: 2}
 --- !u!95 &554568939
