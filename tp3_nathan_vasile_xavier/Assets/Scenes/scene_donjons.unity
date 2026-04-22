@@ -10842,7 +10842,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 486510, guid: 3c6066f9c68d6e846968372f931bb81c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 34.776
+      value: 34.674
       objectReference: {fileID: 0}
     - target: {fileID: 486510, guid: 3c6066f9c68d6e846968372f931bb81c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10889,6 +10889,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 164722, guid: 3c6066f9c68d6e846968372f931bb81c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 376160020}
+    - targetCorrespondingSourceObject: {fileID: 164722, guid: 3c6066f9c68d6e846968372f931bb81c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 376160025}
   m_SourcePrefab: {fileID: 100100000, guid: 3c6066f9c68d6e846968372f931bb81c, type: 3}
 --- !u!4 &376160018 stripped
 Transform:
@@ -11100,6 +11103,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.89316916, y: 0.7717402, z: 0.65453446}
   m_Center: {x: 0.08783902, y: 0.65152436, z: -0.011277592}
+--- !u!114 &376160025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376160019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13a1a4b02b59c9b4ba367cc14ef9df46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &384279368
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43187,7 +43202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationDuLevier: {fileID: 7400000, guid: fc346d6863bc7534ea4d2f37ffbec3d5, type: 2}
-  scriptAnimatorDeLaTrappe: {fileID: 0}
+  scriptAnimatorDeLaTrappe: {fileID: 571456336}
   animationDeLaTrappe: {fileID: 7400000, guid: 69af833ed21193948b14c40220ef52b4, type: 2}
 --- !u!95 &1510990087
 Animator:
@@ -54325,7 +54340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationDuLevier: {fileID: 7400000, guid: 66219f343b8718b43982ce6131b23151, type: 2}
-  scriptAnimatorDeLaTrappe: {fileID: 0}
+  scriptAnimatorDeLaTrappe: {fileID: 552604092}
   animationDeLaTrappe: {fileID: 7400000, guid: d126b8a1a84f73a40ada38bd4ba875c7, type: 2}
 --- !u!95 &1973323604
 Animator:
@@ -55893,7 +55908,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.031
+      value: 5.37
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -55901,7 +55916,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.446
+      value: -19.86
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalRotation.w
