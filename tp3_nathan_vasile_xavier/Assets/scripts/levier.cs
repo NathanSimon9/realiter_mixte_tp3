@@ -2,64 +2,47 @@ using UnityEngine;
 
 public class LevierExpertDebug : MonoBehaviour
 {
-    [Header("Drag & Drop l'animation bleue ici")]
-    public AnimationClip clipAxe;
+    [Header("--- LEVIER (L'objet actuel) ---")]
+    public AnimationClip animationDuLevier;
+
+    [Header("--- TRAPPE (L'objet au sol) ---")]
+    public Animator scriptAnimatorDeLaTrappe;
+    public AnimationClip animationDeLaTrappe;
 
     private bool dejaActive = false;
 
-    private void Awake()
-    {
-        // DEBUG AU CHARGEMENT
-        Debug.Log("<color=magenta><b>[SYSTEM]</b></color> Levier prêt. J'attends le tag 'Player'.");
-
-        Animator anim = GetComponent<Animator>();
-        if (anim == null) Debug.LogError("<color=red><b>[ERREUR]</b></color> Aucun Animator trouvé sur ce levier !");
-        if (clipAxe == null) Debug.LogWarning("<color=yellow><b>[WARNING]</b></color> Tu as oublié de glisser l'animation dans la case !");
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        // 1. DÉTECTION BRUTE
-        Debug.Log("<color=white><b>[COLLISION]</b></color> Objet : <b>" + other.name + "</b> | Tag : <b>" + other.tag + "</b>");
-
-        // 2. FILTRE JOUEUR
-        if (other.CompareTag("Player"))
+        // On vérifie que c'est le joueur et qu'on n'a pas déjà activé le levier
+        if (other.CompareTag("Player") && !dejaActive)
         {
-            Debug.Log("<color=cyan><b>[VERIFICATION]</b></color> Le Tag est correct. Tentative d'activation...");
+            dejaActive = true;
 
-            if (!dejaActive)
+            // 1. JOUE L'ANIMATION DU LEVIER
+            Animator animLevier = GetComponent<Animator>();
+            if (animLevier != null && animationDuLevier != null)
             {
-                Animator anim = GetComponent<Animator>();
-                if (anim != null && clipAxe != null)
-                {
-                    dejaActive = true;
+                animLevier.Play(animationDuLevier.name, 0, 0f);
+                Debug.Log("<color=lime><b>[LEVIER]</b></color> Animation lancée !");
+            }
 
-                    // 3. LANCEMENT ANIMATION
-                    anim.Play(clipAxe.name, 0, 0f);
-                    Debug.Log("<color=lime><b>[ACTION]</b></color> Animation <b>" + clipAxe.name + "</b> lancée avec succès !");
-
-                    // 4. NETTOYAGE PHYSIQUE
-                    Collider col = GetComponent<Collider>();
-                    if (col != null)
-                    {
-                        col.enabled = false;
-                        Debug.Log("<color=orange><b>[PHYSIQUE]</b></color> BoxCollider désactivé pour éviter les doublons.");
-                    }
-
-                    // 5. AUTODESTRUCTION DU SCRIPT
-                    Debug.Log("<color=red><b>[CLEANUP]</b></color> Suppression du script. Mission terminée.");
-                    Destroy(this);
-                }
+            // 2. JOUE L'ANIMATION DE LA TRAPPE
+            if (scriptAnimatorDeLaTrappe != null && animationDeLaTrappe != null)
+            {
+                // Utilise le nom du clip glissé dans la case
+                scriptAnimatorDeLaTrappe.Play(animationDeLaTrappe.name, 0, 0f);
+                Debug.Log("<color=cyan><b>[TRAPPE]</b></color> Animation " + animationDeLaTrappe.name + " lancée !");
             }
             else
             {
-                Debug.Log("<color=gray><b>[REFUS]</b></color> Déjà activé, j'ignore le contact.");
+                Debug.LogError("<color=red><b>[ERREUR]</b></color> Il manque la trappe ou son animation dans l'Inspector !");
             }
-        }
-        else
-        {
-            // SI UN OBJET SANS LE TAG PLAYER TOUCHE LE LEVIER
-            Debug.Log("<color=yellow><b>[INTRUS]</b></color> Contact avec <b>" + other.name + "</b> ignoré car le tag n'est pas 'Player'.");
+
+            // 3. ON DÉSACTIVE TOUT POUR NE PAS RECOMMENCER
+            Collider col = GetComponent<Collider>();
+            if (col != null) col.enabled = false;
+
+            Destroy(this); // Détruit le script (le levier reste là mais ne réagit plus)
         }
     }
 }
