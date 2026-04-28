@@ -9,6 +9,10 @@ public class LevierExpertDebug : MonoBehaviour
     public Animator scriptAnimatorDeLaTrappe;
     public AnimationClip animationDeLaTrappe;
 
+    [Header("--- PORTE SUPPLEMENTAIRE ---")]
+    public Animator scriptAnimatorDeLaPorte;
+    public AnimationClip animationDeLaPorte;
+
     private bool dejaActive = false;
 
     private void OnTriggerEnter(Collider other)
@@ -29,16 +33,18 @@ public class LevierExpertDebug : MonoBehaviour
             // 2. JOUE L'ANIMATION DE LA TRAPPE
             if (scriptAnimatorDeLaTrappe != null && animationDeLaTrappe != null)
             {
-                // Utilise le nom du clip glissé dans la case
                 scriptAnimatorDeLaTrappe.Play(animationDeLaTrappe.name, 0, 0f);
                 Debug.Log("<color=cyan><b>[TRAPPE]</b></color> Animation " + animationDeLaTrappe.name + " lancée !");
             }
-            else
+
+            // 3. JOUE L'ANIMATION DE LA PORTE
+            if (scriptAnimatorDeLaPorte != null && animationDeLaPorte != null)
             {
-                Debug.LogError("<color=red><b>[ERREUR]</b></color> Il manque la trappe ou son animation dans l'Inspector !");
+                scriptAnimatorDeLaPorte.Play(animationDeLaPorte.name, 0, 0f);
+                Debug.Log("<color=orange><b>[PORTE]</b></color> Animation " + animationDeLaPorte.name + " lancée !");
             }
 
-            // 3. ON DÉSACTIVE TOUT POUR NE PAS RECOMMENCER
+            // 4. ON DÉSACTIVE TOUT POUR NE PAS RECOMMENCER
             Collider col = GetComponent<Collider>();
             if (col != null) col.enabled = false;
 
