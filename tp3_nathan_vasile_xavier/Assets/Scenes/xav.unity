@@ -18166,7 +18166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationDuLevier: {fileID: 7400000, guid: fc346d6863bc7534ea4d2f37ffbec3d5, type: 2}
-  scriptAnimatorDeLaTrappe: {fileID: 0}
+  scriptAnimatorDeLaTrappe: {fileID: 653489118}
   animationDeLaTrappe: {fileID: 7400000, guid: 69af833ed21193948b14c40220ef52b4, type: 2}
   scriptAnimatorDeLaPorte: {fileID: 0}
   animationDeLaPorte: {fileID: 0}
