@@ -51,8 +51,6 @@ public class LevierExpertDebug : MonoBehaviour
         AnimLevier2Lora.Play("levier_02");
         yield return new WaitForSeconds(1f);
         Animtrape2l.Play("trape_02_sol");
-        yield return new WaitForSeconds(15f);
-         Animportefinl.gameObject.GetComponent<BoxCollider>().enabled = false; 
-        yield break;
+         yield break;
     }
 }
