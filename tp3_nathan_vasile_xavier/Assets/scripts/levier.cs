@@ -52,8 +52,7 @@ public class LevierExpertDebug : MonoBehaviour
         yield return new WaitForSeconds(1f);
         Animtrape2l.Play("trape_02_sol");
         yield return new WaitForSeconds(15f);
-        Animportefinl.Play("Door_fin");
-        Animportefinl.gameObject.GetComponent<BoxCollider>().enabled = false; 
+         Animportefinl.gameObject.GetComponent<BoxCollider>().enabled = false; 
         yield break;
     }
 }

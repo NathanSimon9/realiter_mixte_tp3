@@ -20,6 +20,7 @@ TagManager:
   - trape_sol
   - sortie1porte
   - levier2
+  - exit1
   layers:
   - Default
   - TransparentFX
