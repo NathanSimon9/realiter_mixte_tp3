@@ -17210,7 +17210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.93
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -18165,11 +18165,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9129c604372aff84e83a6a4fbc18ef41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationDuLevier: {fileID: 7400000, guid: fc346d6863bc7534ea4d2f37ffbec3d5, type: 2}
-  scriptAnimatorDeLaTrappe: {fileID: 653489118}
-  animationDeLaTrappe: {fileID: 7400000, guid: 69af833ed21193948b14c40220ef52b4, type: 2}
-  scriptAnimatorDeLaPorte: {fileID: 0}
-  animationDeLaPorte: {fileID: 0}
+  AnimLevierLora: {fileID: 653489118}
+  AnimLevier2Lora: {fileID: 1499715288}
+  Animtrape1l: {fileID: 1688538867}
+  Animtrape2l: {fileID: 2101398385}
+  Animportefinl: {fileID: 1144049806}
 --- !u!95 &653489118
 Animator:
   serializedVersion: 5
@@ -41845,6 +41845,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SD_Prop_Lever_Wall_01 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 125416, guid: 269e0cd123ae1304e8b9b9d3fcae47eb, type: 3}
+      propertyPath: m_TagString
+      value: levier2
+      objectReference: {fileID: 0}
     - target: {fileID: 471986, guid: 269e0cd123ae1304e8b9b9d3fcae47eb, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.501
@@ -41913,7 +41917,7 @@ PrefabInstance:
       addedObject: {fileID: 1499715288}
     - targetCorrespondingSourceObject: {fileID: 125416, guid: 269e0cd123ae1304e8b9b9d3fcae47eb, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1499715287}
+      addedObject: {fileID: 1499715293}
   m_SourcePrefab: {fileID: 100100000, guid: 269e0cd123ae1304e8b9b9d3fcae47eb, type: 3}
 --- !u!4 &1499715285 stripped
 Transform:
@@ -41925,23 +41929,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 125416, guid: 269e0cd123ae1304e8b9b9d3fcae47eb, type: 3}
   m_PrefabInstance: {fileID: 1499715284}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1499715287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1499715286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9129c604372aff84e83a6a4fbc18ef41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationDuLevier: {fileID: 7400000, guid: 66219f343b8718b43982ce6131b23151, type: 2}
-  scriptAnimatorDeLaTrappe: {fileID: 2101398385}
-  animationDeLaTrappe: {fileID: 7400000, guid: d126b8a1a84f73a40ada38bd4ba875c7, type: 2}
-  scriptAnimatorDeLaPorte: {fileID: 1144049806}
-  animationDeLaPorte: {fileID: 7400000, guid: f27ce21b26c718a42818a9bfc8c90c1d, type: 2}
 --- !u!95 &1499715288
 Animator:
   serializedVersion: 5
@@ -41984,6 +41971,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.69891757, y: 0.5171853, z: 0.847608}
   m_Center: {x: -0.009724276, y: 0.0844134, z: 0.5891389}
+--- !u!114 &1499715293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499715286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9129c604372aff84e83a6a4fbc18ef41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimLevierLora: {fileID: 653489118}
+  AnimLevier2Lora: {fileID: 1499715288}
+  Animtrape1l: {fileID: 1688538867}
+  Animtrape2l: {fileID: 2101398385}
+  Animportefinl: {fileID: 1144049806}
 --- !u!1001 &1503224785
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46698,7 +46702,7 @@ Transform:
   m_GameObject: {fileID: 1679046245}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.12813398, z: -0, w: 0.99175686}
-  m_LocalPosition: {x: -11.76, y: 0.22399998, z: 38.88}
+  m_LocalPosition: {x: -11.24, y: 2.38, z: 25.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -47549,6 +47553,7 @@ Transform:
   - {fileID: 1182186739}
   - {fileID: 615987873}
   - {fileID: 902502254}
+  - {fileID: 1924091921}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1704672830
@@ -49436,7 +49441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -52997,9 +53002,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1924091920}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.100481, y: 1.659668, z: 46.673985}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -18.800642, y: 2.2128906, z: 62.23198}
+  m_LocalScale: {x: 1.3333334, y: 1.3333334, z: 1.3333334}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1327714645}
@@ -53008,7 +53013,7 @@ Transform:
   - {fileID: 2128152261}
   - {fileID: 66566956}
   - {fileID: 803825291}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1692758031}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1926369818
 PrefabInstance:
@@ -60534,4 +60539,3 @@ SceneRoots:
   - {fileID: 1560172046}
   - {fileID: 1794370059}
   - {fileID: 1679046246}
-  - {fileID: 1924091921}

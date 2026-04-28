@@ -19,6 +19,7 @@ TagManager:
   - doorkey
   - trape_sol
   - sortie1porte
+  - levier2
   layers:
   - Default
   - TransparentFX

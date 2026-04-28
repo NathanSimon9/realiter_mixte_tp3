@@ -1,54 +1,59 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class LevierExpertDebug : MonoBehaviour
 {
-    [Header("--- LEVIER (L'objet actuel) ---")]
-    public AnimationClip animationDuLevier;
 
-    [Header("--- TRAPPE (L'objet au sol) ---")]
-    public Animator scriptAnimatorDeLaTrappe;
-    public AnimationClip animationDeLaTrappe;
-
-    [Header("--- PORTE SUPPLEMENTAIRE ---")]
-    public Animator scriptAnimatorDeLaPorte;
-    public AnimationClip animationDeLaPorte;
+    public Animator AnimLevierLora;
+    public Animator AnimLevier2Lora;
+    public Animator Animtrape1l;
+    public Animator Animtrape2l;
+    public Animator Animportefinl;
+  
 
     private bool dejaActive = false;
+    private bool dejaActive2 = false;
 
     private void OnTriggerEnter(Collider other)
     {
         // On vérifie que c'est le joueur et qu'on n'a pas déjà activé le levier
-        if (other.CompareTag("Player") && !dejaActive)
+        if (other.CompareTag("Player") )
         {
-            dejaActive = true;
 
-            // 1. JOUE L'ANIMATION DU LEVIER
-            Animator animLevier = GetComponent<Animator>();
-            if (animLevier != null && animationDuLevier != null)
+            if(gameObject.tag == "levier" && !dejaActive)
             {
-                animLevier.Play(animationDuLevier.name, 0, 0f);
-                Debug.Log("<color=lime><b>[LEVIER]</b></color> Animation lancée !");
+                StartCoroutine("activationLevier1");
+                dejaActive = true;
+            } else if (gameObject.tag == "levier2" && !dejaActive2)
+            {
+                StartCoroutine("activationLevier2");
+                dejaActive2 = true;
             }
 
-            // 2. JOUE L'ANIMATION DE LA TRAPPE
-            if (scriptAnimatorDeLaTrappe != null && animationDeLaTrappe != null)
-            {
-                scriptAnimatorDeLaTrappe.Play(animationDeLaTrappe.name, 0, 0f);
-                Debug.Log("<color=cyan><b>[TRAPPE]</b></color> Animation " + animationDeLaTrappe.name + " lancée !");
-            }
 
-            // 3. JOUE L'ANIMATION DE LA PORTE
-            if (scriptAnimatorDeLaPorte != null && animationDeLaPorte != null)
-            {
-                scriptAnimatorDeLaPorte.Play(animationDeLaPorte.name, 0, 0f);
-                Debug.Log("<color=orange><b>[PORTE]</b></color> Animation " + animationDeLaPorte.name + " lancée !");
-            }
 
-            // 4. ON DÉSACTIVE TOUT POUR NE PAS RECOMMENCER
-            Collider col = GetComponent<Collider>();
-            if (col != null) col.enabled = false;
 
-            Destroy(this); // Détruit le script (le levier reste là mais ne réagit plus)
+            
+
         }
+    }
+
+    public IEnumerator activationLevier1()
+    {
+        AnimLevierLora.Play("levier");
+        yield return new WaitForSeconds(1f);
+        Animtrape1l.Play("trape_Sol_01");
+        yield break;
+    }
+    public IEnumerator activationLevier2()
+    {
+        AnimLevier2Lora.Play("levier_02");
+        yield return new WaitForSeconds(1f);
+        Animtrape2l.Play("trape_02_sol");
+        yield return new WaitForSeconds(15f);
+        Animportefinl.Play("Door_fin");
+        Animportefinl.gameObject.GetComponent<BoxCollider>().enabled = false; 
+        yield break;
     }
 }
