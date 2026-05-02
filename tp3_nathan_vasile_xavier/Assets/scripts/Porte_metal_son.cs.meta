@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: dab3f777ec8bf424ab7e8851c1f32e6b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - metalSqueakSound: {fileID: 8300000, guid: 33215b6d882465947a13229eb46561a3, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
