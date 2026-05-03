@@ -28,6 +28,7 @@ public class condition_potions : MonoBehaviour
     [Header("Audio")]
     public AudioClip sonSuccesEtape; // Le son quand la bouteille est bonne
     public AudioClip sonErreurSequence; // Le son quand on se trompe
+    public AudioClip sonApparitionCle;
     private AudioSource audioSource;
 
     private void Start()
@@ -93,6 +94,7 @@ public class condition_potions : MonoBehaviour
 
     private void VerifierReussite()
     {
+        // Si on a le bon nombre de bouteilles et que ce n'est pas déjà ouvert
         if (bouteillesCount >= validation.Length && !estDejaOuvert)
         {
             estDejaOuvert = true;
@@ -100,12 +102,25 @@ public class condition_potions : MonoBehaviour
 
             if (objetCle != null)
             {
+                // On active l'objet de la clé
                 objetCle.SetActive(true);
                 Debug.Log("La clé est apparue !");
+
+                // On va chercher l'AudioSource qui est SUR la clé
+                AudioSource audioCle = objetCle.GetComponent<AudioSource>();
+
+                if (audioCle != null)
+                {
+                    // On joue le son "aparitions" qui est déjà dans l'AudioSource de la clé
+                    audioCle.Play();
+                }
+                else
+                {
+                    Debug.LogError("Erreur : Ajoute un AudioSource sur l'objet de la clé !");
+                }
             }
         }
     }
-
     private void ResetVisuels()
     {
         bouteillesCount = 0;
