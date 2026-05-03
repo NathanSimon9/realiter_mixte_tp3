@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-
-
 
 public class condition_potions : MonoBehaviour
 {
@@ -23,15 +20,25 @@ public class condition_potions : MonoBehaviour
     private float delaiSecurite = 1f;
 
     [Header("Récompense")]
-    public GameObject objetCle; // Glisse ta clé ici dans l'inspecteur
+    public GameObject objetCle;
 
     [Header("Glisse les paires OFF et ON ici")]
     public GemPair[] pairesDeGems;
 
+    [Header("Audio")]
+    public AudioClip sonSuccesEtape; // Le son quand la bouteille est bonne
+    public AudioClip sonErreurSequence; // Le son quand on se trompe
+    private AudioSource audioSource;
+
     private void Start()
     {
+        // Initialisation de l'audio
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+
         ResetVisuels();
-        // On s'assure que la clé est bien cachée au début
+
         if (objetCle != null) objetCle.SetActive(false);
     }
 
@@ -54,17 +61,19 @@ public class condition_potions : MonoBehaviour
 
     private void TraiterEntree(int couleur)
     {
-        // SECURITÉ CRITIQUE : On vérifie si l'index est valide avant de faire quoi que ce soit
         if (bouteillesCount < 0 || bouteillesCount >= validation.Length) return;
 
         if (validation[bouteillesCount] == couleur)
         {
-            // Verifier que l'index existe aussi dans le tableau des gemmes
+            // --- BONNE BOUTEILLE ---
             if (bouteillesCount < pairesDeGems.Length)
             {
                 pairesDeGems[bouteillesCount].gemOff.SetActive(false);
                 pairesDeGems[bouteillesCount].gemOn.SetActive(true);
             }
+
+            // On joue le son de succès
+            if (sonSuccesEtape != null) audioSource.PlayOneShot(sonSuccesEtape);
 
             bouteillesCount++;
             Debug.Log("Bonne bouteille ! Etape : " + bouteillesCount);
@@ -72,7 +81,12 @@ public class condition_potions : MonoBehaviour
         }
         else
         {
+            // --- ERREUR ---
             Debug.Log("Erreur ! Séquence réinitialisée.");
+
+            // On joue le son d'erreur
+            if (sonErreurSequence != null) audioSource.PlayOneShot(sonErreurSequence);
+
             ResetVisuels();
         }
     }
@@ -84,7 +98,6 @@ public class condition_potions : MonoBehaviour
             estDejaOuvert = true;
             Debug.Log("POTIONS REUSSI !");
 
-            // --- LA CLÉ APPARAÎT ICI ---
             if (objetCle != null)
             {
                 objetCle.SetActive(true);
@@ -96,8 +109,6 @@ public class condition_potions : MonoBehaviour
     private void ResetVisuels()
     {
         bouteillesCount = 0;
-        // On force un délai de sécurité plus long au reset pour éviter que la 
-        // bouteille qui a causé l'erreur ne re-déclenche le script instantanément
         prochainTempsAcceptable = Time.time + delaiSecurite;
 
         foreach (GemPair paire in pairesDeGems)
