@@ -34981,8 +34981,7 @@ MonoBehaviour:
   Animtrape1l: {fileID: 1862287168}
   Animtrape2l: {fileID: 1247510142}
   Animportefinl: {fileID: 1336759394}
-  sonLevier: {fileID: 0}
-  sonTrappe: {fileID: 0}
+  sonLevier: {fileID: 8300000, guid: c3e198839a730434782031568db87817, type: 3}
 --- !u!95 &1168127165
 Animator:
   serializedVersion: 5
@@ -37185,7 +37184,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: b804866d173b771499bb2cf69152de2e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -54252,7 +54251,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: b804866d173b771499bb2cf69152de2e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -58518,8 +58517,7 @@ MonoBehaviour:
   Animtrape1l: {fileID: 1862287168}
   Animtrape2l: {fileID: 1247510142}
   Animportefinl: {fileID: 1336759394}
-  sonLevier: {fileID: 0}
-  sonTrappe: {fileID: 8300000, guid: b804866d173b771499bb2cf69152de2e, type: 3}
+  sonLevier: {fileID: 8300000, guid: c3e198839a730434782031568db87817, type: 3}
 --- !u!65 &1987235019
 BoxCollider:
   m_ObjectHideFlags: 0
