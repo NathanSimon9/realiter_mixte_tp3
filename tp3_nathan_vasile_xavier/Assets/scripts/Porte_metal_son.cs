@@ -1,50 +1,53 @@
 using UnityEngine;
-using System.Collections; // Obligatoire pour utiliser les Coroutines (Wait)
+using System.Collections;
 
 public class Porte_metal_son : MonoBehaviour
 {
     [Header("Paramètres Audio")]
     public AudioClip metalSqueakSound;
-    public float delaiAvantRejouer = 2.0f; // Le temps d'attente de 2 sec
+    public float delaiAvantRejouer = 2.0f;
 
-    private AudioSource audioSource;
-    private bool peutJouer = true; // Pour gérer le temps d'attente
+    private bool peutJouer = true;
 
-    void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-        audioSource.clip = metalSqueakSound;
-        audioSource.playOnAwake = false;
-        audioSource.loop = false; // On ne veut pas qu'il boucle indéfiniment
-    }
-
-    // On utilise OnTriggerEnter car tu as parlé de "Trigger"
     private void OnTriggerEnter(Collider other)
     {
-        // On vérifie si c'est le joueur et si on a le droit de jouer le son
+        // On vérifie si c'est le joueur
         if (other.CompareTag("Player") && peutJouer)
         {
-            StartCoroutine(JouerSonEtAttendre());
+            // On vérifie si l'objet qui a le script a l'un des tags de cellule
+            if (gameObject.tag.StartsWith("cel"))
+            {
+                // On cherche l'AudioSource sur la porte (souvent un enfant du trigger ou l'objet lui-même)
+                AudioSource sourcePorte = GetComponentInChildren<AudioSource>();
+
+                if (sourcePorte != null)
+                {
+                    StartCoroutine(JouerSonEtAttendre(sourcePorte));
+                }
+                else
+                {
+                    Debug.LogWarning("Aucun AudioSource trouvé sur " + gameObject.name + " ou ses enfants !");
+                }
+            }
         }
     }
 
-    IEnumerator JouerSonEtAttendre()
+    IEnumerator JouerSonEtAttendre(AudioSource source)
     {
-        peutJouer = false; // On bloque le son pour ne pas qu'il se répète
+        peutJouer = false;
 
-        Debug.Log("<color=cyan>🔊 Son lancé !</color>");
-        audioSource.Play();
+        Debug.Log("<color=cyan>🔊 Grincement lancé sur : </color>" + gameObject.tag);
 
-        // On attend que le son finisse, plus 1 seconde supplémentaire comme demandé
-        // Si ton son fait 2 sec, il attendra 3 sec au total
-        yield return new WaitForSeconds(audioSource.clip.length + 1.0f);
+        // On joue le son unique
+        source.PlayOneShot(metalSqueakSound);
 
-        Debug.Log("<color=orange>⌛ Fin du son (+1s). Début du délai d'attente...</color>");
+        // Attente : longueur du son + 1 seconde
+        yield return new WaitForSeconds(metalSqueakSound.length + 1.0f);
 
-        // On attend les 2 secondes de sécurité avant de pouvoir recommencer
+        // Délai de sécurité
         yield return new WaitForSeconds(delaiAvantRejouer);
 
-        peutJouer = true; // On autorise à nouveau le son
-        Debug.Log("<color=green>✅ Prêt à rejouer !</color>");
+        peutJouer = true;
+        Debug.Log("<color=green>✅ Prêt pour le prochain grincement !</color>");
     }
 }

@@ -3552,7 +3552,7 @@ GameObject:
   - component: {fileID: 130667655}
   m_Layer: 0
   m_Name: SD_Env_PrisonCell_Door_01
-  m_TagString: Untagged
+  m_TagString: cel6
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16822,7 +16822,7 @@ GameObject:
   - component: {fileID: 631543908}
   m_Layer: 0
   m_Name: SD_Env_PrisonCell_Door_01 (1)
-  m_TagString: Untagged
+  m_TagString: cel2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17035,7 +17035,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.698
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -17088,7 +17088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   metalSqueakSound: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
-  delaiAvantRejouer: 2
+  delaiAvantRejouer: 0
 --- !u!1001 &634931144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20561,7 +20561,7 @@ GameObject:
   - component: {fileID: 752471697}
   m_Layer: 0
   m_Name: SD_Env_PrisonCell_Door_01
-  m_TagString: Untagged
+  m_TagString: cel1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21459,7 +21459,7 @@ GameObject:
   - component: {fileID: 770881937}
   m_Layer: 0
   m_Name: SD_Env_PrisonCell_Door_01 (3)
-  m_TagString: Untagged
+  m_TagString: cel4
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40470,7 +40470,7 @@ GameObject:
   - component: {fileID: 1371946856}
   m_Layer: 0
   m_Name: SD_Env_PrisonCell_Door_01
-  m_TagString: Untagged
+  m_TagString: cel5
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42250,7 +42250,7 @@ GameObject:
   - component: {fileID: 1462397098}
   m_Layer: 0
   m_Name: SD_Env_PrisonCell_Door_01 (2)
-  m_TagString: Untagged
+  m_TagString: cel3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
