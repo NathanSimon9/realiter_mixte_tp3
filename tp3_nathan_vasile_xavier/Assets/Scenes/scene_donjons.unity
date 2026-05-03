@@ -16543,8 +16543,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.0937216, y: 3.0741267, z: 0.25}
-  m_Center: {x: -1.5468616, y: -0.000000042429868, z: -0.030110456}
+  m_Size: {x: 3.288306, y: 3.0741267, z: 0.25000006}
+  m_Center: {x: -1.6441556, y: 0.00000002997425, z: -0.030110782}
 --- !u!59 &631543904
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -41322,7 +41322,7 @@ HingeJoint:
   m_Anchor: {x: 0.015, y: -1.55, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.5326489, y: -0.4930296, z: 0.1277225}
+  m_ConnectedAnchor: {x: -0.53321964, y: -0.49302977, z: 0.13075338}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -44978,7 +44978,7 @@ Transform:
   m_GameObject: {fileID: 1599134919}
   serializedVersion: 2
   m_LocalRotation: {x: 0.007853894, y: 0.9999692, z: -0, w: 0}
-  m_LocalPosition: {x: -1.6259276, y: 1.3531346, z: -0.3710022}
+  m_LocalPosition: {x: -1.632, y: 0.971, z: -0.3710022}
   m_LocalScale: {x: 0.3849536, y: 0.64048004, z: 0.35894665}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -45087,7 +45087,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1599134919}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
