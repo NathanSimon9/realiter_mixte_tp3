@@ -3721,7 +3721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab3f777ec8bf424ab7e8851c1f32e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  metalSqueakSound: {fileID: 8300000, guid: 33215b6d882465947a13229eb46561a3, type: 3}
+  metalSqueakSound: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
   delaiAvantRejouer: 2
 --- !u!82 &130667656
 AudioSource:
@@ -10049,9 +10049,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 170560, guid: e48e29ed31a89bc45a47e31ea282be74, type: 3}
       insertIndex: -1
       addedObject: {fileID: 306575532}
-    - targetCorrespondingSourceObject: {fileID: 170560, guid: e48e29ed31a89bc45a47e31ea282be74, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 306575533}
   m_SourcePrefab: {fileID: 100100000, guid: e48e29ed31a89bc45a47e31ea282be74, type: 3}
 --- !u!4 &306575525 stripped
 Transform:
@@ -10233,102 +10230,6 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!82 &306575533
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 306575526}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 0
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -17186,7 +17087,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab3f777ec8bf424ab7e8851c1f32e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  metalSqueakSound: {fileID: 8300000, guid: 33215b6d882465947a13229eb46561a3, type: 3}
+  metalSqueakSound: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
   delaiAvantRejouer: 2
 --- !u!1001 &634931144
 PrefabInstance:
@@ -20829,7 +20730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab3f777ec8bf424ab7e8851c1f32e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  metalSqueakSound: {fileID: 8300000, guid: 33215b6d882465947a13229eb46561a3, type: 3}
+  metalSqueakSound: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
   delaiAvantRejouer: 2
 --- !u!82 &752471698
 AudioSource:
@@ -21727,7 +21628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab3f777ec8bf424ab7e8851c1f32e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  metalSqueakSound: {fileID: 8300000, guid: 33215b6d882465947a13229eb46561a3, type: 3}
+  metalSqueakSound: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
   delaiAvantRejouer: 2
 --- !u!82 &770881938
 AudioSource:
@@ -25096,9 +24997,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 130644, guid: 3172cd7c4bb1c844480cf63cbddbba08, type: 3}
       insertIndex: -1
       addedObject: {fileID: 913794253}
-    - targetCorrespondingSourceObject: {fileID: 130644, guid: 3172cd7c4bb1c844480cf63cbddbba08, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 913794251}
   m_SourcePrefab: {fileID: 100100000, guid: 3172cd7c4bb1c844480cf63cbddbba08, type: 3}
 --- !u!4 &913794244 stripped
 Transform:
@@ -25310,19 +25208,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.40747833, y: 0.9356761, z: 0.40747863}
   m_Center: {x: 0.0000019073486, y: 0.46783805, z: 0}
---- !u!114 &913794251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 913794245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10b5a163f6b44b249aed500f800e0a40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sonBouteille: {fileID: 8300000, guid: edad814671a7aa74c8c75af54c49b1d4, type: 3}
 --- !u!82 &913794252
 AudioSource:
   m_ObjectHideFlags: 0
@@ -40754,7 +40639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab3f777ec8bf424ab7e8851c1f32e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  metalSqueakSound: {fileID: 8300000, guid: 33215b6d882465947a13229eb46561a3, type: 3}
+  metalSqueakSound: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
   delaiAvantRejouer: 2
 --- !u!82 &1371946857
 AudioSource:
@@ -42534,7 +42419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab3f777ec8bf424ab7e8851c1f32e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  metalSqueakSound: {fileID: 8300000, guid: 33215b6d882465947a13229eb46561a3, type: 3}
+  metalSqueakSound: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
   delaiAvantRejouer: 2
 --- !u!82 &1462397099
 AudioSource:
@@ -46240,7 +46125,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b82133594e1152448b5c2a6dd1e71b91, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -54253,7 +54138,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b804866d173b771499bb2cf69152de2e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.853
   m_Pitch: 1
   Loop: 0
   Mute: 0

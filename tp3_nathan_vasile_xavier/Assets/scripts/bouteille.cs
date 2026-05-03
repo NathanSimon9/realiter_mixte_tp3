@@ -1,11 +1,13 @@
 using UnityEngine;
+using System.Collections; // Nécessaire pour les Coroutines
 
 public class InteractionCouleurs : MonoBehaviour
 {
     [Header("Audio Unique")]
-    public AudioClip sonBouteille; // Une seule case pour le son
+    public AudioClip sonBouteille;
 
     private AudioSource audioSource;
+    private bool peutJouer = true; // Pour éviter de relancer le délai si on touche déjà quelque chose
 
     void Start()
     {
@@ -18,19 +20,28 @@ public class InteractionCouleurs : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // On récupère le tag de l'objet touché
         string tagTouche = collision.gameObject.tag;
 
-        // On garde les "if" pour savoir ce qu'on a touché dans la console
-        if (tagTouche == "red")
+        if ((tagTouche == "red" || tagTouche == "green") && peutJouer)
         {
-            audioSource.Play();
-            Debug.Log("<color=red>🔴 Impact sur du ROUGE : Son joué !</color>");
+            StartCoroutine(JouerSonAvecDelai(tagTouche));
         }
-        else if (tagTouche == "green")
-        {
-            audioSource.Play();
-            Debug.Log("<color=green>🟢 Impact sur du VERT : Son joué !</color>");
-        }
+    }
+
+    IEnumerator JouerSonAvecDelai(string tag)
+    {
+        peutJouer = false; // On bloque les autres entrées pendant le délai
+
+        // --- DÉLAI DE 2 SECONDES ---
+        yield return new WaitForSeconds(2f);
+
+        audioSource.Play();
+
+        if (tag == "red")
+            Debug.Log("<color=red>🔴 Impact ROUGE (après 2s) !</color>");
+        else
+            Debug.Log("<color=green>🟢 Impact VERT (après 2s) !</color>");
+
+        peutJouer = true; // On autorise à nouveau le son après la lecture
     }
 }
