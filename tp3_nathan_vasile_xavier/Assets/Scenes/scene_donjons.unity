@@ -14608,8 +14608,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab727190f8d62d34cbdb66d7f9193ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  porteAnimator: {fileID: 0}
-  triggerOuverture: Porte_clee
   sonOuverture: {fileID: 0}
 --- !u!114 &530886146
 MonoBehaviour:
@@ -38760,9 +38758,6 @@ PrefabInstance:
       addedObject: {fileID: 1336759394}
     - targetCorrespondingSourceObject: {fileID: 173666, guid: 5aa30891913dc934fa50d8fc19f4fde3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1336759395}
-    - targetCorrespondingSourceObject: {fileID: 173666, guid: 5aa30891913dc934fa50d8fc19f4fde3, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1336759401}
   m_SourcePrefab: {fileID: 100100000, guid: 5aa30891913dc934fa50d8fc19f4fde3, type: 3}
 --- !u!1 &1336759392 stripped
@@ -38796,27 +38791,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!65 &1336759395
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1336759392}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.560706, y: 4.585015, z: 0.45363146}
-  m_Center: {x: -0.9, y: 2.19, z: 0}
 --- !u!4 &1336759398 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 421908, guid: 5aa30891913dc934fa50d8fc19f4fde3, type: 3}
@@ -45980,8 +45954,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab727190f8d62d34cbdb66d7f9193ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  porteAnimator: {fileID: 1336759394}
-  triggerOuverture: Porte_clee
   sonOuverture: {fileID: 8300000, guid: b82133594e1152448b5c2a6dd1e71b91, type: 3}
 --- !u!114 &1599134922
 MonoBehaviour:

@@ -1,5 +1,6 @@
 using UnityEngine;
-using System.Collections; // Nécessaire pour les Coroutines
+using System.Collections;
+using System.Collections.Generic; // Pour gérer la liste des contacts
 
 public class InteractionCouleurs : MonoBehaviour
 {
@@ -7,7 +8,10 @@ public class InteractionCouleurs : MonoBehaviour
     public AudioClip sonBouteille;
 
     private AudioSource audioSource;
-    private bool peutJouer = true; // Pour éviter de relancer le délai si on touche déjà quelque chose
+    private bool peutJouer = true;
+
+    // Liste pour suivre les objets red/green actuellement touchés
+    private List<GameObject> objetsEnContact = new List<GameObject>();
 
     void Start()
     {
@@ -22,26 +26,54 @@ public class InteractionCouleurs : MonoBehaviour
     {
         string tagTouche = collision.gameObject.tag;
 
-        if ((tagTouche == "red" || tagTouche == "green") && peutJouer)
+        if (tagTouche == "red" || tagTouche == "green")
         {
-            StartCoroutine(JouerSonAvecDelai(tagTouche));
+            // On ajoute l'objet à notre liste de contacts
+            if (!objetsEnContact.Contains(collision.gameObject))
+            {
+                objetsEnContact.Add(collision.gameObject);
+            }
+
+            // On lance la coroutine si elle n'est pas déjà en cours
+            if (peutJouer)
+            {
+                StartCoroutine(JouerSonSiToujoursEnContact(tagTouche));
+            }
         }
     }
 
-    IEnumerator JouerSonAvecDelai(string tag)
+    private void OnCollisionExit(Collision collision)
     {
-        peutJouer = false; // On bloque les autres entrées pendant le délai
+        // Quand on ne touche plus l'objet, on le retire de la liste
+        if (objetsEnContact.Contains(collision.gameObject))
+        {
+            objetsEnContact.Remove(collision.gameObject);
+        }
+    }
 
-        // --- DÉLAI DE 2 SECONDES ---
+    IEnumerator JouerSonSiToujoursEnContact(string dernierTag)
+    {
+        peutJouer = false;
+
+        // --- ATTENTE DE 2 SECONDES ---
         yield return new WaitForSeconds(2f);
 
-        audioSource.Play();
+        // --- VÉRIFICATION FINALE ---
+        // Si la liste n'est pas vide, cela veut dire qu'on touche encore au moins un objet valide
+        if (objetsEnContact.Count > 0)
+        {
+            audioSource.Play();
 
-        if (tag == "red")
-            Debug.Log("<color=red>🔴 Impact ROUGE (après 2s) !</color>");
+            if (dernierTag == "red")
+                Debug.Log("<color=red>🔴 Toujours en contact : Son ROUGE joué !</color>");
+            else
+                Debug.Log("<color=green>🟢 Toujours en contact : Son VERT joué !</color>");
+        }
         else
-            Debug.Log("<color=green>🟢 Impact VERT (après 2s) !</color>");
+        {
+            Debug.Log("⏳ Contact rompu avant les 2s : Le son ne joue pas.");
+        }
 
-        peutJouer = true; // On autorise à nouveau le son après la lecture
+        peutJouer = true;
     }
 }
