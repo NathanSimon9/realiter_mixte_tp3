@@ -16,19 +16,10 @@ public class LavaDeath : MonoBehaviour
 
         if (other.transform.root.CompareTag("Player"))
         {
-            PlayerControllerVR player =
-                other.transform.root.GetComponent<PlayerControllerVR>();
+            // ➕ AJOUT IMPORTANT (dégâts vie)
+            DamagePlayer(other.transform.root.gameObject);
 
-            if (player != null)
-            {
-                player.TakeDamage(1);
-
-                // 💀 si le joueur est mort → on fait la vraie death sequence
-                if (player.currentLives <= 0)
-                {
-                    StartCoroutine(DeathSequence());
-                }
-            }
+            StartCoroutine(DeathSequence());
         }
     }
 
@@ -59,6 +50,23 @@ public class LavaDeath : MonoBehaviour
             fadeImage.color = new Color(0, 0, 0, alpha);
 
             yield return null;
+        }
+    }
+
+    // ➕ AJOUT POUR SYSTÈME DE VIE
+    public void DamagePlayer(GameObject player)
+    {
+        PlayerLives lives = player.GetComponent<PlayerLives>();
+
+        if (lives != null)
+        {
+            lives.TakeDamage(1);
+
+            // si mort → on déclenche la vraie mort (fade + reload)
+            if (lives.currentLives <= 0)
+            {
+                StartCoroutine(DeathSequence());
+            }
         }
     }
 }
