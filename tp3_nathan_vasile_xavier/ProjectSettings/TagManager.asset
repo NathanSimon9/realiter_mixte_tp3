@@ -27,6 +27,7 @@ TagManager:
   - cel4
   - cel5
   - cel6
+  - lave
   layers:
   - Default
   - TransparentFX
