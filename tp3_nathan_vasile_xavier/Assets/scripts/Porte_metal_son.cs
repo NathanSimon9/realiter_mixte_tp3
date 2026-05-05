@@ -1,53 +1,82 @@
 using UnityEngine;
-using System.Collections;
 
 public class Porte_metal_son : MonoBehaviour
 {
-    [Header("Paramètres Audio")]
-    public AudioClip metalSqueakSound;
-    public float delaiAvantRejouer = 2.0f;
+    public AudioClip cell_door;
 
-    private bool peutJouer = true;
+    private AudioSource sourcePorte;
+    private bool dejaJoue = false;
 
-    private void OnTriggerEnter(Collider other)
+    void Start()
     {
-        // On vérifie si c'est le joueur
-        if (other.CompareTag("Player") && peutJouer)
-        {
-            // On vérifie si l'objet qui a le script a l'un des tags de cellule
-            if (gameObject.tag.StartsWith("cel"))
-            {
-                // On cherche l'AudioSource sur la porte (souvent un enfant du trigger ou l'objet lui-même)
-                AudioSource sourcePorte = GetComponentInChildren<AudioSource>();
+        sourcePorte = GetComponentInChildren<AudioSource>();
 
-                if (sourcePorte != null)
-                {
-                    StartCoroutine(JouerSonEtAttendre(sourcePorte));
-                }
-                else
-                {
-                    Debug.LogWarning("Aucun AudioSource trouvé sur " + gameObject.name + " ou ses enfants !");
-                }
-            }
+        if (sourcePorte == null)
+        {
+            Debug.LogError("❌ Aucun AudioSource !");
+            return;
+        }
+
+        sourcePorte.loop = false;
+        sourcePorte.spatialBlend = 1f;
+
+        Debug.Log("✅ Porte prête");
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (!EstMain(collision.collider) || !EstCellule())
+            return;
+
+        Debug.Log("🖐️ Main touche porte");
+
+        if (!dejaJoue)
+        {
+            PlaySon();
+            dejaJoue = true;
         }
     }
 
-    IEnumerator JouerSonEtAttendre(AudioSource source)
+    void OnCollisionExit(Collision collision)
     {
-        peutJouer = false;
+        if (!EstMain(collision.collider) || !EstCellule())
+            return;
 
-        Debug.Log("<color=cyan>🔊 Grincement lancé sur : </color>" + gameObject.tag);
+        Debug.Log("✋ Main quitte porte");
 
-        // On joue le son unique
-        source.PlayOneShot(metalSqueakSound);
+        // reset pour autoriser un prochain son
+        dejaJoue = false;
+    }
 
-        // Attente : longueur du son + 1 seconde
-        yield return new WaitForSeconds(metalSqueakSound.length + 1.0f);
+    void PlaySon()
+    {
+        if (cell_door == null)
+        {
+            Debug.LogError("❌ Audio manquant");
+            return;
+        }
 
-        // Délai de sécurité
-        yield return new WaitForSeconds(delaiAvantRejouer);
+        sourcePorte.clip = cell_door;
+        sourcePorte.pitch = Random.Range(0.95f, 1.05f);
 
-        peutJouer = true;
-        Debug.Log("<color=green>✅ Prêt pour le prochain grincement !</color>");
+        Debug.Log("🎵 PLAY cell_door ONCE");
+
+        sourcePorte.Play();
+    }
+
+    bool EstMain(Collider col)
+    {
+        return col.CompareTag("Player") || col.transform.root.CompareTag("Player");
+    }
+
+    bool EstCellule()
+    {
+        if (!gameObject.tag.StartsWith("cel")) return false;
+
+        int n;
+        if (int.TryParse(gameObject.tag.Substring(3), out n))
+            return n >= 1 && n <= 6;
+
+        return false;
     }
 }

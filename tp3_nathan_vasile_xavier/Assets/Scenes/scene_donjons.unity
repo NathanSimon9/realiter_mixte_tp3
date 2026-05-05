@@ -4539,8 +4539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab3f777ec8bf424ab7e8851c1f32e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  metalSqueakSound: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
-  delaiAvantRejouer: 2
+  cell_door: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
 --- !u!82 &130667656
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4553,7 +4552,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -19536,7 +19535,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -19632,8 +19631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab3f777ec8bf424ab7e8851c1f32e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  metalSqueakSound: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
-  delaiAvantRejouer: 0
+  cell_door: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
 --- !u!1001 &634931144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23900,8 +23898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab3f777ec8bf424ab7e8851c1f32e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  metalSqueakSound: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
-  delaiAvantRejouer: 2
+  cell_door: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
 --- !u!82 &752471698
 AudioSource:
   m_ObjectHideFlags: 0
@@ -23914,7 +23911,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -24889,8 +24886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab3f777ec8bf424ab7e8851c1f32e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  metalSqueakSound: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
-  delaiAvantRejouer: 2
+  cell_door: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
 --- !u!82 &770881938
 AudioSource:
   m_ObjectHideFlags: 0
@@ -24903,7 +24899,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -46429,8 +46425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab3f777ec8bf424ab7e8851c1f32e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  metalSqueakSound: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
-  delaiAvantRejouer: 2
+  cell_door: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
 --- !u!82 &1371946857
 AudioSource:
   m_ObjectHideFlags: 0
@@ -48573,8 +48568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab3f777ec8bf424ab7e8851c1f32e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  metalSqueakSound: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
-  delaiAvantRejouer: 2
+  cell_door: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
 --- !u!82 &1462397099
 AudioSource:
   m_ObjectHideFlags: 0
@@ -48587,7 +48581,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c019c4d3fe6b41048bed28db97adc084, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
