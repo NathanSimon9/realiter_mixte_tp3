@@ -5,14 +5,8 @@ using System.Collections;
 
 public class LavaDeath : MonoBehaviour
 {
-    [Header("UI")]
     public Image fadeImage;
     public float fadeDuration = 0.5f;
-
-    [Header("Audio")]
-    public AudioSource audioSource;
-    public AudioClip burnSound;
-    public AudioClip deathSound;
 
     private bool isDying = false;
 
@@ -22,7 +16,19 @@ public class LavaDeath : MonoBehaviour
 
         if (other.transform.root.CompareTag("Player"))
         {
-            StartCoroutine(DeathSequence());
+            PlayerControllerVR player =
+                other.transform.root.GetComponent<PlayerControllerVR>();
+
+            if (player != null)
+            {
+                player.TakeDamage(1);
+
+                // 💀 si le joueur est mort → on fait la vraie death sequence
+                if (player.currentLives <= 0)
+                {
+                    StartCoroutine(DeathSequence());
+                }
+            }
         }
     }
 
@@ -30,24 +36,13 @@ public class LavaDeath : MonoBehaviour
     {
         isDying = true;
 
-        // 🔥 son de brûlure (immédiat)
-        if (audioSource != null && burnSound != null)
-            audioSource.PlayOneShot(burnSound);
-
         // Pause gameplay
         Time.timeScale = 0f;
 
-        // Fade
+        // Fade (IMPORTANT : utiliser unscaled time)
         yield return StartCoroutine(FadeToBlack());
 
-        // 💀 son de mort (juste avant reload)
-        if (audioSource != null && deathSound != null)
-            audioSource.PlayOneShot(deathSound);
-
-        // petit délai pour entendre le son
-        yield return new WaitForSecondsRealtime(0.3f);
-
-        // Reset + reload
+        // Reload scene
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
