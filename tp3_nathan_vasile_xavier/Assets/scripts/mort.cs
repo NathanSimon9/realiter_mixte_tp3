@@ -5,12 +5,13 @@ using System.Collections;
 
 public class LavaDeath : MonoBehaviour
 {
+    [Header("UI")]
     public Image fadeImage;
     public float fadeDuration = 0.5f;
 
     [Header("Audio")]
     public AudioSource audioSource;
-    public AudioClip lavaSound;
+    public AudioClip burnSound;
     public AudioClip deathSound;
 
     private bool isDying = false;
@@ -21,21 +22,7 @@ public class LavaDeath : MonoBehaviour
 
         if (other.transform.root.CompareTag("Player"))
         {
-            PlayerLives player =
-                other.transform.root.GetComponent<PlayerLives>();
-
-            if (player != null)
-            {
-                // 🔥 son de lave (impact immédiat)
-                PlaySound(lavaSound);
-
-                player.TakeDamage(1);
-
-                if (player.currentLives <= 0)
-                {
-                    StartCoroutine(DeathSequence());
-                }
-            }
+            StartCoroutine(DeathSequence());
         }
     }
 
@@ -43,16 +30,26 @@ public class LavaDeath : MonoBehaviour
     {
         isDying = true;
 
-        // 💀 son de mort
-        PlaySound(deathSound);
+        // 🔥 son de brûlure (immédiat)
+        if (audioSource != null && burnSound != null)
+            audioSource.PlayOneShot(burnSound);
 
+        // Pause gameplay
         Time.timeScale = 0f;
 
+        // Fade
         yield return StartCoroutine(FadeToBlack());
 
-        Time.timeScale = 1f;
+        // 💀 son de mort (juste avant reload)
+        if (audioSource != null && deathSound != null)
+            audioSource.PlayOneShot(deathSound);
 
-        SceneManager.LoadScene("Menu");
+        // petit délai pour entendre le son
+        yield return new WaitForSecondsRealtime(0.3f);
+
+        // Reset + reload
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     IEnumerator FadeToBlack()
@@ -67,14 +64,6 @@ public class LavaDeath : MonoBehaviour
             fadeImage.color = new Color(0, 0, 0, alpha);
 
             yield return null;
-        }
-    }
-
-    void PlaySound(AudioClip clip)
-    {
-        if (audioSource != null && clip != null)
-        {
-            audioSource.PlayOneShot(clip);
         }
     }
 }
