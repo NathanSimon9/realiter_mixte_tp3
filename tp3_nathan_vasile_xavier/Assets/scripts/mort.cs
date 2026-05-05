@@ -8,6 +8,11 @@ public class LavaDeath : MonoBehaviour
     public Image fadeImage;
     public float fadeDuration = 0.5f;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip lavaSound;
+    public AudioClip deathSound;
+
     private bool isDying = false;
 
     private void OnTriggerEnter(Collider other)
@@ -16,10 +21,21 @@ public class LavaDeath : MonoBehaviour
 
         if (other.transform.root.CompareTag("Player"))
         {
-            // ➕ AJOUT IMPORTANT (dégâts vie)
-            DamagePlayer(other.transform.root.gameObject);
+            PlayerLives player =
+                other.transform.root.GetComponent<PlayerLives>();
 
-            StartCoroutine(DeathSequence());
+            if (player != null)
+            {
+                // 🔥 son de lave (impact immédiat)
+                PlaySound(lavaSound);
+
+                player.TakeDamage(1);
+
+                if (player.currentLives <= 0)
+                {
+                    StartCoroutine(DeathSequence());
+                }
+            }
         }
     }
 
@@ -27,15 +43,16 @@ public class LavaDeath : MonoBehaviour
     {
         isDying = true;
 
-        // Pause gameplay
+        // 💀 son de mort
+        PlaySound(deathSound);
+
         Time.timeScale = 0f;
 
-        // Fade (IMPORTANT : utiliser unscaled time)
         yield return StartCoroutine(FadeToBlack());
 
-        // Reload scene
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        SceneManager.LoadScene("Menu");
     }
 
     IEnumerator FadeToBlack()
@@ -53,20 +70,11 @@ public class LavaDeath : MonoBehaviour
         }
     }
 
-    // ➕ AJOUT POUR SYSTÈME DE VIE
-    public void DamagePlayer(GameObject player)
+    void PlaySound(AudioClip clip)
     {
-        PlayerLives lives = player.GetComponent<PlayerLives>();
-
-        if (lives != null)
+        if (audioSource != null && clip != null)
         {
-            lives.TakeDamage(1);
-
-            // si mort → on déclenche la vraie mort (fade + reload)
-            if (lives.currentLives <= 0)
-            {
-                StartCoroutine(DeathSequence());
-            }
+            audioSource.PlayOneShot(clip);
         }
     }
 }
