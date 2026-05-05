@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2261427772946511238}
   m_Layer: 0
   m_Name: piege_pique_sol
-  m_TagString: Untagged
+  m_TagString: sol_spike
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

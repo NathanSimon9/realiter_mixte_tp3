@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4375160856343651531}
   m_Layer: 0
   m_Name: piege_swingaxe
-  m_TagString: Untagged
+  m_TagString: axe_swing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
