@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8275350034521577758}
   m_Layer: 0
   m_Name: piege_trap_roof
-  m_TagString: Untagged
+  m_TagString: roof_spike
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
