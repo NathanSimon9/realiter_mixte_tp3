@@ -18,15 +18,24 @@ TagManager:
   - levier
   - doorkey
   - trape_sol
+  - sortie1porte
+  - levier2
+  - exit1
+  - cel1
+  - cel2
+  - cel3
+  - cel4
+  - cel5
+  - cel6
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Mains
   - Water
   - UI
   - Ground
-  - 
+  - ObjetsSaisissables
   - 
   - 
   - 

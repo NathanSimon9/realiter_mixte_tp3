@@ -1,65 +1,79 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class LevierExpertDebug : MonoBehaviour
 {
-    [Header("Drag & Drop l'animation bleue ici")]
-    public AnimationClip clipAxe;
+    [Header("Animators")]
+    public Animator AnimLevierLora;
+    public Animator AnimLevier2Lora;
+    public Animator Animtrape1l;
+    public Animator Animtrape2l;
+    public Animator Animportefinl;
+
+    [Header("Sons")]
+    public AudioClip sonLevier; // Le son pour le levier lui-même
+    private AudioSource audioSourceLevier;
 
     private bool dejaActive = false;
+    private bool dejaActive2 = false;
 
     private void Awake()
     {
-        // DEBUG AU CHARGEMENT
-        Debug.Log("<color=magenta><b>[SYSTEM]</b></color> Levier prêt. J'attends le tag 'Player'.");
-
-        Animator anim = GetComponent<Animator>();
-        if (anim == null) Debug.LogError("<color=red><b>[ERREUR]</b></color> Aucun Animator trouvé sur ce levier !");
-        if (clipAxe == null) Debug.LogWarning("<color=yellow><b>[WARNING]</b></color> Tu as oublié de glisser l'animation dans la case !");
+        // On récupère l'AudioSource du levier
+        audioSourceLevier = GetComponent<AudioSource>();
+        if (audioSourceLevier == null) audioSourceLevier = gameObject.AddComponent<AudioSource>();
+        audioSourceLevier.playOnAwake = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // 1. DÉTECTION BRUTE
-        Debug.Log("<color=white><b>[COLLISION]</b></color> Objet : <b>" + other.name + "</b> | Tag : <b>" + other.tag + "</b>");
-
-        // 2. FILTRE JOUEUR
         if (other.CompareTag("Player"))
         {
-            Debug.Log("<color=cyan><b>[VERIFICATION]</b></color> Le Tag est correct. Tentative d'activation...");
-
-            if (!dejaActive)
+            if (gameObject.tag == "levier" && !dejaActive)
             {
-                Animator anim = GetComponent<Animator>();
-                if (anim != null && clipAxe != null)
-                {
-                    dejaActive = true;
-
-                    // 3. LANCEMENT ANIMATION
-                    anim.Play(clipAxe.name, 0, 0f);
-                    Debug.Log("<color=lime><b>[ACTION]</b></color> Animation <b>" + clipAxe.name + "</b> lancée avec succès !");
-
-                    // 4. NETTOYAGE PHYSIQUE
-                    Collider col = GetComponent<Collider>();
-                    if (col != null)
-                    {
-                        col.enabled = false;
-                        Debug.Log("<color=orange><b>[PHYSIQUE]</b></color> BoxCollider désactivé pour éviter les doublons.");
-                    }
-
-                    // 5. AUTODESTRUCTION DU SCRIPT
-                    Debug.Log("<color=red><b>[CLEANUP]</b></color> Suppression du script. Mission terminée.");
-                    Destroy(this);
-                }
+                StartCoroutine("activationLevier1");
+                dejaActive = true;
             }
-            else
+            else if (gameObject.tag == "levier2" && !dejaActive2)
             {
-                Debug.Log("<color=gray><b>[REFUS]</b></color> Déjà activé, j'ignore le contact.");
+                StartCoroutine("activationLevier2");
+                dejaActive2 = true;
             }
         }
-        else
+    }
+
+    public IEnumerator activationLevier1()
+    {
+        // 1. Son du levier
+        if (sonLevier != null) audioSourceLevier.PlayOneShot(sonLevier);
+        AnimLevierLora.Play("levier");
+
+        yield return new WaitForSeconds(1f);
+
+        // 2. Son de la trappe 1 (récupéré directement sur l'objet de la trappe)
+        if (Animtrape1l != null)
         {
-            // SI UN OBJET SANS LE TAG PLAYER TOUCHE LE LEVIER
-            Debug.Log("<color=yellow><b>[INTRUS]</b></color> Contact avec <b>" + other.name + "</b> ignoré car le tag n'est pas 'Player'.");
+            AudioSource audioTrappe = Animtrape1l.GetComponent<AudioSource>();
+            if (audioTrappe != null) audioTrappe.Play();
         }
+        Animtrape1l.Play("trape_Sol_01");
+    }
+
+    public IEnumerator activationLevier2()
+    {
+        // 1. Son du levier
+        if (sonLevier != null) audioSourceLevier.PlayOneShot(sonLevier);
+        AnimLevier2Lora.Play("levier_02");
+
+        yield return new WaitForSeconds(1f);
+
+        // 2. Son de la trappe 2 (récupéré directement sur l'objet de la trappe)
+        if (Animtrape2l != null)
+        {
+            AudioSource audioTrappe = Animtrape2l.GetComponent<AudioSource>();
+            if (audioTrappe != null) audioTrappe.Play();
+        }
+        Animtrape2l.Play("trape_02_sol");
     }
 }
