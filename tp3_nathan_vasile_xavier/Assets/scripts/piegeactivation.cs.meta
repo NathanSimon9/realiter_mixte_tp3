@@ -3,7 +3,15 @@ guid: 9d309e89d8679014585c63216554b324
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - sonGrinderSimple: {fileID: 8300000, guid: 8d4c7362f26a5a5438e780bf5084d582, type: 3}
+  - sonGrinderTriple_1: {fileID: 8300000, guid: 8d4c7362f26a5a5438e780bf5084d582, type: 3}
+  - sonGrinderTriple_2: {fileID: 8300000, guid: 8d4c7362f26a5a5438e780bf5084d582, type: 3}
+  - sonGrinderTriple_3: {fileID: 8300000, guid: 8d4c7362f26a5a5438e780bf5084d582, type: 3}
+  - sonSolSpike: {fileID: 8300000, guid: d2f657c3a3a4aeb43bd8fc62a2d2a29d, type: 3}
+  - sonScie: {fileID: 8300000, guid: 6418e421efaab7242b76c01ccdf5119d, type: 3}
+  - sonAxeSwing: {fileID: 8300000, guid: 793926ff0e094e342b9965c12119fe59, type: 3}
+  - sonRoofSpike: {fileID: 8300000, guid: d2f657c3a3a4aeb43bd8fc62a2d2a29d, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
