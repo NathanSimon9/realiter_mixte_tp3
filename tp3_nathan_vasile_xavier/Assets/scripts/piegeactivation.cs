@@ -2,8 +2,7 @@
 
 public class SceneMechanicsAudio : MonoBehaviour
 {
-    [Header("Categorie 1 - Grinder Simple")]
-    public AudioClip sonGrinderSimple;
+    // Grinder Simple et Lava SUPPRIMÉS pour éviter les erreurs de son de départ
 
     [Header("Categorie 2 - Grinder Triple")]
     public AudioClip sonGrinderTriple_1;
@@ -24,7 +23,7 @@ public class SceneMechanicsAudio : MonoBehaviour
 
     void Start()
     {
-        PlayCategory1();
+        // On lance uniquement les catégories qui ont des sons de départ
         PlayCategory2();
         PlayCategory3();
         PlayCategory4();
@@ -32,29 +31,16 @@ public class SceneMechanicsAudio : MonoBehaviour
         PlayCategory6();
     }
 
-    // 🔹 CATEGORIE 1
-    void PlayCategory1()
-    {
-        PlaySingle("grinder_simple", sonGrinderSimple, "Grinder Simple");
-    }
-
     // 🔹 CATEGORIE 2
     void PlayCategory2()
     {
         GameObject obj = GameObject.FindGameObjectWithTag("grinder_triple");
 
-        if (obj == null)
-        {
-            Debug.LogWarning("❌ Grinder triple introuvable");
-            return;
-        }
+        if (obj == null) return;
 
         AudioSource source = GetOrAddAudio(obj);
-
         source.loop = false;
         source.spatialBlend = 1f;
-
-        Debug.Log("🔊 Grinder Triple");
 
         if (sonGrinderTriple_1 != null) source.PlayOneShot(sonGrinderTriple_1);
         if (sonGrinderTriple_2 != null) source.PlayOneShot(sonGrinderTriple_2);
@@ -64,7 +50,7 @@ public class SceneMechanicsAudio : MonoBehaviour
     // 🔹 CATEGORIE 3
     void PlayCategory3()
     {
-        PlaySingle("sol spike", sonSolSpike, "Sol Spike");
+        PlaySingle("sol_spike", sonSolSpike, "Sol Spike");
     }
 
     // 🔹 CATEGORIE 4
@@ -82,44 +68,30 @@ public class SceneMechanicsAudio : MonoBehaviour
     // 🔹 CATEGORIE 6
     void PlayCategory6()
     {
-        PlaySingle("roof spike", sonRoofSpike, "Roof Spike");
+        // Utilise le tag approprié pour tes spikes de plafond
+        PlaySingle("sol_spike", sonRoofSpike, "Roof Spike");
     }
 
     // 🔧 UTILITAIRE
     void PlaySingle(string tag, AudioClip clip, string label)
     {
-        if (clip == null)
-        {
-            Debug.LogWarning("❌ Clip manquant : " + label);
-            return;
-        }
+        if (clip == null) return;
 
         GameObject obj = GameObject.FindGameObjectWithTag(tag);
-
-        if (obj == null)
-        {
-            Debug.LogWarning("❌ Objet introuvable : " + tag);
-            return;
-        }
+        if (obj == null) return;
 
         AudioSource source = GetOrAddAudio(obj);
-
         source.clip = clip;
         source.loop = false;
         source.spatialBlend = 1f;
-
-        Debug.Log("🔊 PLAY : " + label);
-
         source.Play();
     }
 
     AudioSource GetOrAddAudio(GameObject obj)
     {
         AudioSource source = obj.GetComponent<AudioSource>();
-
         if (source == null)
             source = obj.AddComponent<AudioSource>();
-
         return source;
     }
 }

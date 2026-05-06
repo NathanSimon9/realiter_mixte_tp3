@@ -178,7 +178,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d309e89d8679014585c63216554b324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sonGrinderSimple: {fileID: 8300000, guid: 8d4c7362f26a5a5438e780bf5084d582, type: 3}
   sonGrinderTriple_1: {fileID: 8300000, guid: 8d4c7362f26a5a5438e780bf5084d582, type: 3}
   sonGrinderTriple_2: {fileID: 8300000, guid: 8d4c7362f26a5a5438e780bf5084d582, type: 3}
   sonGrinderTriple_3: {fileID: 8300000, guid: 8d4c7362f26a5a5438e780bf5084d582, type: 3}
@@ -207,7 +206,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 3
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -242,7 +241,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -303,7 +302,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 2
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -338,7 +337,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -399,7 +398,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 2
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0

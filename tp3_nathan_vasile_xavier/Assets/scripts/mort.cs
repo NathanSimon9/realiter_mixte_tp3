@@ -1,17 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using System.Collections;
 
-public class VRDeathHandler : MonoBehaviour
+public class VRTrapDeath : MonoBehaviour
 {
-    [Header("UI (Placé devant les yeux en VR)")]
-    public Image fadeImage;
-    public float fadeDuration = 0.5f;
-
     [Header("Audio")]
     public AudioSource audioSource;
-    public AudioClip impactSound;
     public AudioClip deathSound;
 
     private bool isDying = false;
@@ -20,71 +13,66 @@ public class VRDeathHandler : MonoBehaviour
     {
         if (isDying) return;
 
-        // Vérifie si l'objet qui touche le piège est le Player (ou sa caméra)
-        if (other.transform.root.CompareTag("Player") || other.CompareTag("MainCamera"))
+        // Debug pour voir ce qui touche le trigger
+        Debug.Log("Trigger touché par : " + other.name + " (Tag: " + other.tag + ")");
+
+        if (other.CompareTag("Player"))
         {
-            // Vérifie le tag de l'objet porteur de ce script
-            if (gameObject.CompareTag("sol_spike") ||
-                gameObject.CompareTag("scie") ||
-                gameObject.CompareTag("grinder_triple") ||
-                gameObject.CompareTag("axe_swing") ||
-                gameObject.CompareTag("Lava")) // Tag Lava conservé
-            {
-                StartCoroutine(VRDeathSequence());
-            }
+            CheckTagAndDie();
         }
     }
 
-    // Au cas où tes scies/grinders utilisent des collisions physiques (pas trigger)
     private void OnCollisionEnter(Collision collision)
     {
         if (isDying) return;
 
-        if (collision.transform.root.CompareTag("Player"))
+        // Debug pour voir ce qui entre en collision physique
+        Debug.Log("Collision avec : " + collision.gameObject.name + " (Tag: " + collision.gameObject.tag + ")");
+
+        if (collision.gameObject.CompareTag("Player"))
         {
-            if (gameObject.CompareTag("sol_spike") ||
-                gameObject.CompareTag("scie") ||
-                gameObject.CompareTag("grinder_triple") ||
-                gameObject.CompareTag("axe_swing") ||
-                gameObject.CompareTag("Lava"))
-            {
-                StartCoroutine(VRDeathSequence());
-            }
+            CheckTagAndDie();
         }
     }
 
-    IEnumerator VRDeathSequence()
+    void CheckTagAndDie()
+    {
+        // Debug pour vérifier le tag de l'objet qui porte ce script
+        Debug.Log("Vérification du tag du piège : " + gameObject.tag);
+
+        if (gameObject.CompareTag("sol_spike") ||
+            gameObject.CompareTag("scie") ||
+            gameObject.CompareTag("grinder_triple") ||
+            gameObject.CompareTag("axe_swing"))
+        {
+            Die();
+        }
+        else
+        {
+            Debug.LogWarning("⚠️ Le joueur a touché l'objet, mais le tag '" + gameObject.tag + "' n'est pas reconnu dans le script de mort.");
+        }
+    }
+
+    void Die()
     {
         isDying = true;
+        Debug.Log("💀 Mort enclenchée ! Son de mort lancé.");
 
-        // Son immédiat du piège
-        if (audioSource != null && impactSound != null)
-            audioSource.PlayOneShot(impactSound);
-
-        // On lance le fondu au noir (indispensable en VR pour éviter le malaise)
-        yield return StartCoroutine(FadeToBlack());
-
-        // Son de "Game Over" final
         if (audioSource != null && deathSound != null)
+        {
             audioSource.PlayOneShot(deathSound);
+        }
+        else
+        {
+            Debug.LogWarning("🔊 AudioSource ou AudioClip manquant sur " + gameObject.name);
+        }
 
-        // Petit délai pour laisser respirer le joueur dans le noir
-        yield return new WaitForSecondsRealtime(0.6f);
-
-        // Recharge le niveau actuel
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Invoke("ReloadScene", 0.5f);
     }
 
-    IEnumerator FadeToBlack()
+    void ReloadScene()
     {
-        float t = 0f;
-        while (t < fadeDuration)
-        {
-            t += Time.unscaledDeltaTime;
-            float alpha = Mathf.Clamp01(t / fadeDuration);
-            if (fadeImage != null)
-                fadeImage.color = new Color(0, 0, 0, alpha);
-            yield return null;
-        }
+        Debug.Log("🔄 Rechargement de la scène : " + SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
