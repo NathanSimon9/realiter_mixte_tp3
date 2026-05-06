@@ -31489,8 +31489,8 @@ GameObject:
   - component: {fileID: 777114136}
   - component: {fileID: 777114139}
   - component: {fileID: 777114138}
-  - component: {fileID: 777114140}
   - component: {fileID: 777114141}
+  - component: {fileID: 777114144}
   - component: {fileID: 777114142}
   - component: {fileID: 777114143}
   m_Layer: 0
@@ -31565,23 +31565,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 777114135}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &777114140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 777114135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fc2e75034903a0408c70b6e5928a4a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadeImage: {fileID: 1351390070}
-  fadeDuration: 0.5
-  audioSource: {fileID: 777114142}
-  burnSound: {fileID: 8300000, guid: 532ab366d503ace4bbe66708f869f774, type: 3}
-  deathSound: {fileID: 8300000, guid: b0c3a5017804ad245bfec9875e3ff51f, type: 3}
 --- !u!65 &777114141
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31795,6 +31778,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &777114144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777114135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42aa971dc921b124eb179d54ab86f2df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeImage: {fileID: 1351390070}
+  fadeDuration: 0.5
+  audioSource: {fileID: 0}
+  burnSound: {fileID: 0}
+  deathSound: {fileID: 0}
 --- !u!1001 &778348241
 PrefabInstance:
   m_ObjectHideFlags: 0
