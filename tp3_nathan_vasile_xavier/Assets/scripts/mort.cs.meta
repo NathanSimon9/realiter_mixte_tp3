@@ -3,7 +3,11 @@ guid: 7fc2e75034903a0408c70b6e5928a4a8
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - fadeImage: {instanceID: 0}
+  - audioSource: {instanceID: 0}
+  - impactSound: {fileID: 8300000, guid: 532ab366d503ace4bbe66708f869f774, type: 3}
+  - deathSound: {fileID: 8300000, guid: b0c3a5017804ad245bfec9875e3ff51f, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
