@@ -23,14 +23,25 @@ public class EnemyVision360 : MonoBehaviour
     public AudioClip sonPas;
 
     [Header("Audio Distance")]
-    public float distanceSonPas = 8f;   // Distance max pour entendre les pas
+    public float distanceSonPas = 8f;
     public float intervalPas = 0.5f;
+
+    [Header("Alarme Lumières")]
+    public Light[] alarmLights;
+    public float blinkSpeed = 8f;
+    public float minIntensity = 0f;
+    public float maxIntensity = 6f;
+    public float retourDouxVitesse = 2f; // 🔥 vitesse du retour smooth
 
     private NavMeshAgent agent;
     private AudioSource audioSource;
 
     private bool enChasse;
+    private bool alarmeActive;
     private float footstepTimer;
+
+    private Color[] originalColors;
+    private float[] originalIntensities;
 
     void Start()
     {
@@ -40,6 +51,15 @@ public class EnemyVision360 : MonoBehaviour
         agent.speed = vitessePatrouille;
         ConfigurerAudio();
         ChoisirNouveauPoint();
+
+        originalColors = new Color[alarmLights.Length];
+        originalIntensities = new float[alarmLights.Length];
+
+        for (int i = 0; i < alarmLights.Length; i++)
+        {
+            originalColors[i] = alarmLights[i].color;
+            originalIntensities[i] = alarmLights[i].intensity;
+        }
     }
 
     void Update()
@@ -52,14 +72,11 @@ public class EnemyVision360 : MonoBehaviour
             {
                 enChasse = true;
                 agent.speed = vitesseChasse;
-
-                if (sonAlerte != null)
-                    audioSource.PlayOneShot(sonAlerte);
+                ActiverAlarme();
             }
 
             Vector3 targetPos = joueur.position;
             targetPos.y = transform.position.y;
-
             agent.SetDestination(targetPos);
         }
         else
@@ -68,16 +85,16 @@ public class EnemyVision360 : MonoBehaviour
             {
                 enChasse = false;
                 agent.speed = vitessePatrouille;
+                DesactiverAlarme();
                 ChoisirNouveauPoint();
             }
 
             if (!agent.pathPending && agent.remainingDistance < 0.5f)
-            {
                 ChoisirNouveauPoint();
-            }
         }
 
         GererPas();
+        GererLumieres();
     }
 
     bool PeutVoirJoueur()
@@ -95,12 +112,64 @@ public class EnemyVision360 : MonoBehaviour
         return true;
     }
 
+    void ActiverAlarme()
+    {
+        alarmeActive = true;
+
+        if (sonAlerte != null)
+        {
+            audioSource.clip = sonAlerte;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+    }
+
+    void DesactiverAlarme()
+    {
+        alarmeActive = false;
+        audioSource.Stop();
+    }
+
+    void GererLumieres()
+    {
+        for (int i = 0; i < alarmLights.Length; i++)
+        {
+            if (alarmeActive)
+            {
+                float intensity = Mathf.Lerp(
+                    minIntensity,
+                    maxIntensity,
+                    Mathf.PingPong(Time.time * blinkSpeed, 1)
+                );
+
+                alarmLights[i].color = Color.red;
+                alarmLights[i].intensity = intensity;
+            }
+            else
+            {
+                // 🔥 RETOUR DOUX
+                alarmLights[i].color = Color.Lerp(
+                    alarmLights[i].color,
+                    originalColors[i],
+                    Time.deltaTime * retourDouxVitesse
+                );
+
+                alarmLights[i].intensity = Mathf.Lerp(
+                    alarmLights[i].intensity,
+                    originalIntensities[i],
+                    Time.deltaTime * retourDouxVitesse
+                );
+            }
+        }
+    }
+
     void ChoisirNouveauPoint()
     {
         Vector3 randomDirection = Random.insideUnitSphere * rayonPatrouille;
         randomDirection += transform.position;
 
         NavMeshHit hit;
+
         if (NavMesh.SamplePosition(randomDirection, out hit, rayonPatrouille, NavMesh.AllAreas))
         {
             agent.SetDestination(hit.position);
@@ -113,14 +182,12 @@ public class EnemyVision360 : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, joueur.position);
 
-        // Trop loin → on ne joue rien
         if (distance > distanceSonPas)
         {
             footstepTimer = 0f;
             return;
         }
 
-        // Pas en mouvement → rien
         if (agent.velocity.magnitude < 0.2f)
             return;
 
@@ -130,10 +197,8 @@ public class EnemyVision360 : MonoBehaviour
         {
             if (sonPas != null)
             {
-                // Volume augmente quand il se rapproche
                 float volume = 1f - (distance / distanceSonPas);
                 volume = Mathf.Clamp01(volume);
-
                 audioSource.PlayOneShot(sonPas, volume);
             }
 
@@ -143,7 +208,7 @@ public class EnemyVision360 : MonoBehaviour
 
     void ConfigurerAudio()
     {
-        audioSource.spatialBlend = 1f;      // Full 3D
+        audioSource.spatialBlend = 1f;
         audioSource.minDistance = 1.5f;
         audioSource.maxDistance = distanceSonPas;
         audioSource.rolloffMode = AudioRolloffMode.Logarithmic;
