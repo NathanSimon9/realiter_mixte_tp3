@@ -134,9 +134,6 @@ PrefabInstance:
       addedObject: {fileID: 6929565128534025150}
     - targetCorrespondingSourceObject: {fileID: 162648, guid: bc01676a2a3ad2f4a8fd668528c68131, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6507986274680849434}
-    - targetCorrespondingSourceObject: {fileID: 162648, guid: bc01676a2a3ad2f4a8fd668528c68131, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1086655309640652676}
     - targetCorrespondingSourceObject: {fileID: 162648, guid: bc01676a2a3ad2f4a8fd668528c68131, type: 3}
       insertIndex: -1
@@ -179,20 +176,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.6392455, y: 7.329789, z: 0.94584656}
   m_Center: {x: -0.17533326, y: -3.188858, z: 0.034942627}
---- !u!114 &6507986274680849434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2522954345159591785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fc2e75034903a0408c70b6e5928a4a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 1086655309640652676}
-  deathSound: {fileID: 8300000, guid: b0c3a5017804ad245bfec9875e3ff51f, type: 3}
 --- !u!82 &1086655309640652676
 AudioSource:
   m_ObjectHideFlags: 0

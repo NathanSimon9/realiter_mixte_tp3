@@ -1,12 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System.Collections;
 
-[System.Diagnostics.DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
 public class VRTrapDeath : MonoBehaviour
 {
+    [Header("UI")]
+    [SerializeField] private Image fadeImage; // Glisse ton image noire du Canvas ici
+    [SerializeField] private float fadeDuration = 0.5f;
+
     [Header("Audio")]
     public AudioSource audioSource;
-    public AudioClip deathSound;
+    public AudioClip hitSound;   // Son de l'impact (scie, pics, etc.)
+    public AudioClip deathSound; // Son de mort global
 
     private bool isDying = false;
 
@@ -14,10 +20,7 @@ public class VRTrapDeath : MonoBehaviour
     {
         if (isDying) return;
 
-        // Debug pour voir ce qui touche le trigger
-        Debug.Log("Trigger touché par : " + other.name + " (Tag: " + other.tag + ")");
-
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.transform.root.CompareTag("Player"))
         {
             CheckTagAndDie();
         }
@@ -27,10 +30,7 @@ public class VRTrapDeath : MonoBehaviour
     {
         if (isDying) return;
 
-        // Debug pour voir ce qui entre en collision physique
-        Debug.Log("Collision avec : " + collision.gameObject.name + " (Tag: " + collision.gameObject.tag + ")");
-
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") || collision.transform.root.CompareTag("Player"))
         {
             CheckTagAndDie();
         }
@@ -38,47 +38,48 @@ public class VRTrapDeath : MonoBehaviour
 
     void CheckTagAndDie()
     {
-        // Debug pour vérifier le tag de l'objet qui porte ce script
-        Debug.Log("Vérification du tag du piège : " + gameObject.tag);
-
+        // Vérification des tags spécifiques à ton projet Montmo
         if (gameObject.CompareTag("sol_spike") ||
             gameObject.CompareTag("scie") ||
             gameObject.CompareTag("grinder_triple") ||
             gameObject.CompareTag("axe_swing"))
         {
-            Die();
-        }
-        else
-        {
-            Debug.LogWarning("⚠️ Le joueur a touché l'objet, mais le tag '" + gameObject.tag + "' n'est pas reconnu dans le script de mort.");
+            StartCoroutine(DeathSequence());
         }
     }
 
-    void Die()
+    private IEnumerator DeathSequence()
     {
         isDying = true;
-        Debug.Log("💀 Mort enclenchée ! Son de mort lancé.");
 
-        if (audioSource != null && deathSound != null)
+        // Jouer les sons
+        if (audioSource != null)
         {
-            audioSource.PlayOneShot(deathSound);
-        }
-        else
-        {
-            Debug.LogWarning("🔊 AudioSource ou AudioClip manquant sur " + gameObject.name);
+            if (hitSound != null) audioSource.PlayOneShot(hitSound);
+            if (deathSound != null) audioSource.PlayOneShot(deathSound);
         }
 
-        Invoke("ReloadScene", 0.5f);
-    }
+        // Geler le jeu pour la VR
+        Time.timeScale = 0f;
 
-    void ReloadScene()
-    {
-        Debug.Log("🔄 Rechargement de la scène : " + SceneManager.GetActiveScene().name);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+        // Fondu au noir
+        if (fadeImage != null)
+        {
+            float elapsed = 0f;
+            while (elapsed < fadeDuration)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                float alpha = Mathf.Clamp01(elapsed / fadeDuration);
+                fadeImage.color = new Color(0, 0, 0, alpha);
+                yield return null;
+            }
+        }
 
-    private string GetDebuggerDisplay()
-    {
-        return ToString();
+        // Petit délai de sécurité en temps réel
+        yield return new WaitForSecondsRealtime(0.3f);
+
+        // Remettre le temps à la normale et charger l'index 3
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(3);
     }
 }

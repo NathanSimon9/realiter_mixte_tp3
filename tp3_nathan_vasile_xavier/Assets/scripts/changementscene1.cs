@@ -7,7 +7,7 @@ public class ExitTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Contact détecté !");
+            Debug.Log("Contact dï¿½tectï¿½ !");
             SceneManager.LoadScene(2);
         }
     }
