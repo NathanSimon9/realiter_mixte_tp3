@@ -31725,6 +31725,8 @@ MonoBehaviour:
   audioSource: {fileID: 777114145}
   burnSound: {fileID: 8300000, guid: 532ab366d503ace4bbe66708f869f774, type: 3}
   deathSound: {fileID: 8300000, guid: b0c3a5017804ad245bfec9875e3ff51f, type: 3}
+  postFadeDelay: 0.3
+  verboseLogs: 1
 --- !u!82 &777114145
 AudioSource:
   m_ObjectHideFlags: 0

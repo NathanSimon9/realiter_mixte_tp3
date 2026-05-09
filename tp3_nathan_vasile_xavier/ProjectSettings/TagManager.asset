@@ -29,6 +29,7 @@ TagManager:
   - cel6
   - lave
   - mure
+  - carte
   layers:
   - Default
   - TransparentFX
