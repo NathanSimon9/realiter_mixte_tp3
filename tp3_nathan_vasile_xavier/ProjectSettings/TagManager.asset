@@ -30,6 +30,7 @@ TagManager:
   - lave
   - mure
   - carte
+  - exit2
   layers:
   - Default
   - TransparentFX
