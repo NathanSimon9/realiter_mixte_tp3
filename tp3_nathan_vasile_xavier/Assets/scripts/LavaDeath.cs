@@ -1,128 +1,128 @@
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using System.Collections;
+ using UnityEngine;
 
-public class LavaDeath : MonoBehaviour
+using UnityEngine.SceneManagement;
+
+using UnityEngine.UI;
+
+using System.Collections;
+ 
+public class VRLavaDeath : MonoBehaviour
+
 {
+
     [Header("UI")]
-    [SerializeField] private Image fadeImage;
-    [Tooltip("Duration of the fade in seconds (real time).")]
+
+    [SerializeField] private Image fadeImage; // Glisse ton image noire du Canvas ici
+
     [SerializeField] private float fadeDuration = 0.5f;
 
     [Header("Audio")]
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip burnSound;
-    [SerializeField] private AudioClip deathSound;
 
-    [Header("Scene")]
-    [Tooltip("Scene name to reload when the player dies. If empty, the scene that contains this lava object will be used.")]
-    [SerializeField] private string sceneToReload = "scene_pont";
+    public AudioSource audioSource;
 
-    [Header("Timing")]
-    [Tooltip("Extra real-time delay after fade before reloading the scene.")]
+    public AudioClip burnSound;  // Le son spécifique à la lave (sizzle)
+
+    public AudioClip deathSound; // Son de mort global
+
+    [Header("Settings")]
+
     [SerializeField] private float postFadeDelay = 0.3f;
 
-    [Header("Debug")]
-    [SerializeField] private bool verboseLogs = false;
+    private bool isDying = false;
 
-    private bool isDying;
+    // Détection de la lave
 
     private void OnTriggerEnter(Collider other)
+
     {
+
         if (isDying) return;
 
-        if (other.transform.root.CompareTag("Player"))
+        // On vérifie si l'objet qui touche la lave est le Player
+
+        if (other.CompareTag("Player") || other.transform.root.CompareTag("Player"))
+
         {
-            // Determine which scene name to reload: inspector override or the scene that contains this lava object
-            string sceneNameToReload = string.IsNullOrEmpty(sceneToReload) ? gameObject.scene.name : sceneToReload;
 
-            if (verboseLogs)
-            {
-                Debug.Log($"[LavaDeath] Active scene: {SceneManager.GetActiveScene().buildIndex} - {SceneManager.GetActiveScene().name}");
-                Debug.Log($"[LavaDeath] Lava object scene: {gameObject.scene.buildIndex} - {gameObject.scene.name}");
-                Debug.Log($"[LavaDeath] Chosen scene to reload: {sceneNameToReload}");
-                if (sceneNameToReload != gameObject.scene.name)
-                    Debug.Log($"[LavaDeath] Using inspector override 'sceneToReload' instead of lava object's scene.");
-            }
+            Debug.Log("🔥 Contact avec la lave !");
 
-            StartCoroutine(DeathSequence(sceneNameToReload));
+            StartCoroutine(DeathSequence());
+
         }
+
     }
 
-    // Pass the scene name to reload so we don't depend on the active scene or build order
-    private IEnumerator DeathSequence(string sceneName)
+    // Cette fonction peut aussi être appelée par d'autres scripts si besoin
+
+    public void StartDeathSequence()
+
     {
+
+        if (!isDying) StartCoroutine(DeathSequence());
+
+    }
+
+    private IEnumerator DeathSequence()
+
+    {
+
         isDying = true;
 
-        if (verboseLogs) Debug.Log($"[LavaDeath] DeathSequence start at {Time.realtimeSinceStartup:F3}s (reload '{sceneName}')");
-
-        // Play sounds immediately in real time
-        PlaySoundSafe(burnSound);
-        PlaySoundSafe(deathSound);
-
-        // Freeze game time (useful for VR synchronization)
-        Time.timeScale = 0f;
-        if (verboseLogs) Debug.Log($"[LavaDeath] Time frozen at {Time.realtimeSinceStartup:F3}s");
-
-        // Start fade using unscaled time
-        if (fadeImage != null)
-            StartCoroutine(FadeToBlack());
-
-        // Wait for fade to finish in real time
-        yield return new WaitForSecondsRealtime(fadeDuration);
-
-        if (verboseLogs) Debug.Log($"[LavaDeath] Fade finished at {Time.realtimeSinceStartup:F3}s");
-
-        // Small real-time delay so sounds can be heard
-        yield return new WaitForSecondsRealtime(postFadeDelay);
-
-        // Restore time and reload
-        Time.timeScale = 1f;
-        if (verboseLogs) Debug.Log($"[LavaDeath] Restoring time and reloading at {Time.realtimeSinceStartup:F3}s");
-
-        // Reload the scene by name (ensure the scene name is added to Build Settings)
-        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
-    }
-
-    /// <summary>
-    /// Plays a clip via the configured AudioSource or falls back to PlayClipAtPoint.
-    /// Ensures playback is triggered in real time even if the AudioListener gets paused.
-    /// </summary>
-    private void PlaySoundSafe(AudioClip clip)
-    {
-        if (clip == null) return;
+        // Jouer les sons de brûlure et de mort
 
         if (audioSource != null)
+
         {
-            audioSource.ignoreListenerPause = true;
-            audioSource.PlayOneShot(clip);
-            if (verboseLogs) Debug.Log($"[LavaDeath] Played clip '{clip.name}' at {Time.realtimeSinceStartup:F3}s");
+
+            if (burnSound != null) audioSource.PlayOneShot(burnSound);
+
+            if (deathSound != null) audioSource.PlayOneShot(deathSound);
+
         }
-        else
+
+        // Geler le temps pour l'immersion VR
+
+        Time.timeScale = 0f;
+
+        // Lancer le fondu au noir
+
+        if (fadeImage != null)
+
         {
-            Vector3 pos = Camera.main != null ? Camera.main.transform.position : Vector3.zero;
-            AudioSource.PlayClipAtPoint(clip, pos);
-            if (verboseLogs) Debug.Log($"[LavaDeath] Played clip (fallback) '{clip.name}' at {Time.realtimeSinceStartup:F3}s");
+
+            float elapsed = 0f;
+
+            while (elapsed < fadeDuration)
+
+            {
+
+                elapsed += Time.unscaledDeltaTime; // Utilise le temps réel car timeScale est à 0
+
+                float alpha = Mathf.Clamp01(elapsed / fadeDuration);
+
+                fadeImage.color = new Color(0, 0, 0, alpha);
+
+                yield return null;
+
+            }
+
+            fadeImage.color = Color.black;
+
         }
+
+        // Petit délai supplémentaire en temps réel
+
+        yield return new WaitForSecondsRealtime(postFadeDelay);
+
+        // Remettre le temps à la normale pour la scène suivante
+
+        Time.timeScale = 1f;
+
+        // Chargement de la scène à l'index 3
+        // Rechargement de la scène actuelle
+        Debug.Log("🔄 Rechargement de la scène : " + SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
     }
 
-    private IEnumerator FadeToBlack()
-    {
-        if (fadeImage == null)
-            yield break;
-
-        float elapsed = 0f;
-        Color start = fadeImage.color;
-
-        while (elapsed < fadeDuration)
-        {
-            elapsed += Time.unscaledDeltaTime;
-            float alpha = Mathf.Clamp01(elapsed / Mathf.Max(0.0001f, fadeDuration));
-            fadeImage.color = new Color(0f, 0f, 0f, alpha);
-            yield return null;
-        }
-
-        fadeImage.color = new Color(0f, 0f, 0f, 1f);
-    }
 }
