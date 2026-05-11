@@ -3,21 +3,17 @@ using UnityEngine.SceneManagement;
 
 public class LevelExit : MonoBehaviour
 {
+    [Header("Configuration de la porte")]
+    [Tooltip("Cochez la scène correspondante à cette porte dans l'inspecteur")]
+    public int sceneToLoad;
+
     private void OnTriggerEnter(Collider other)
     {
-        // Si on touche la première sortie
-        if (other.CompareTag("exit1"))
+        // On vérifie si l'objet qui entre dans la porte est le joueur
+        if (other.CompareTag("Player"))
         {
-            SceneManager.LoadScene(2);
+            Debug.Log("Le Joueur a franchi la porte. Chargement de la scène : " + sceneToLoad);
+            SceneManager.LoadScene(sceneToLoad);
         }
-        // Si on touche la deuxième sortie
-        if (other.CompareTag("exit2"))
-        {
-            SceneManager.LoadScene(3);
-        }
-          if (other.CompareTag("exit3"))
-        {
-            SceneManager.LoadScene(4);
-        }
-  }
+    }
 }
