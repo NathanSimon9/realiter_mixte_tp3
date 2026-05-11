@@ -15,5 +15,9 @@ public class LevelExit : MonoBehaviour
         {
             SceneManager.LoadScene(3);
         }
-    }
+          if (other.CompareTag("exit3"))
+        {
+            SceneManager.LoadScene(4);
+        }
+  }
 }

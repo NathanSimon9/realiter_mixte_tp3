@@ -2,26 +2,43 @@
 
 public class AlarmLightManager : MonoBehaviour
 {
-    [Header("Toutes les Point Lights à contrôler")]
+    public static AlarmLightManager Instance;
+
+    [Header("Configuration")]
     public Light[] alarmLights;
+    public AudioSource audioSource;
+    public AudioClip alarmSound;
 
-    [Header("Audio")]
-    public AudioSource audioSource; // Glisse ton AudioSource ici
-    public AudioClip alarmSound;   // Glisse ton clip d'alarme ici (mets-le en "Loop" dans l'AudioSource si besoin)
-
-    [Header("Clignotement")]
+    [Header("Paramètres Clignotement")]
     public float blinkSpeed = 6f;
     public float minIntensity = 0f;
     public float maxIntensity = 6f;
 
     private bool alarmActive = false;
+    private int guardsDetectingPlayer = 0;
 
-    void Start()
+    // Tableaux pour stocker l'état initial
+    private float[] originalIntensities;
+    private Color[] originalColors;
+
+    void Awake()
     {
-        // Optionnel : s'assurer que le son ne joue pas au lancement
-        if (audioSource != null && audioSource.isPlaying)
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+
+        if (alarmLights == null || alarmLights.Length == 0)
         {
-            audioSource.Stop();
+            alarmLights = GetComponentsInChildren<Light>();
+        }
+
+        // On sauvegarde TOUT : intensité ET couleur
+        originalIntensities = new float[alarmLights.Length];
+        originalColors = new Color[alarmLights.Length];
+
+        for (int i = 0; i < alarmLights.Length; i++)
+        {
+            originalIntensities[i] = alarmLights[i].intensity;
+            originalColors[i] = alarmLights[i].color;
         }
     }
 
@@ -37,39 +54,44 @@ public class AlarmLightManager : MonoBehaviour
 
         foreach (Light l in alarmLights)
         {
-            l.color = Color.red;
+            l.color = Color.red; // Force le rouge pendant l'alerte
             l.intensity = intensity;
         }
     }
 
     public void StartAlarm()
     {
-        if (alarmActive) return; // Évite de relancer si déjà actif
+        guardsDetectingPlayer++;
 
+        if (alarmActive) return;
         alarmActive = true;
 
-        // Jouer le son
         if (audioSource != null && alarmSound != null)
         {
             audioSource.clip = alarmSound;
-            audioSource.loop = true; // On veut que l'alarme boucle
+            audioSource.loop = true;
+            audioSource.spatialBlend = 0f;
             audioSource.Play();
         }
     }
 
     public void StopAlarm()
     {
-        alarmActive = false;
+        guardsDetectingPlayer--;
 
-        // Arrêter le son
-        if (audioSource != null)
+        if (guardsDetectingPlayer <= 0)
         {
-            audioSource.Stop();
-        }
+            guardsDetectingPlayer = 0;
+            alarmActive = false;
 
-        foreach (Light l in alarmLights)
-        {
-            l.intensity = minIntensity;
+            if (audioSource != null) audioSource.Stop();
+
+            // RÉINITIALISATION COMPLÈTE
+            for (int i = 0; i < alarmLights.Length; i++)
+            {
+                alarmLights[i].intensity = originalIntensities[i]; // Remet l'intensité de base
+                alarmLights[i].color = originalColors[i];         // Remet la couleur de base (blanc/jaune)
+            }
         }
     }
 }

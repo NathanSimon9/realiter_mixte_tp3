@@ -4,44 +4,26 @@ using UnityEngine.AI;
 [RequireComponent(typeof(AudioSource))]
 public class EnemyVision360 : MonoBehaviour
 {
-    [Header("Référence joueur (Main Camera VR)")]
+    [Header("Références")]
     public Transform joueur;
-
-    [Header("Vision")]
-    public float distanceVision = 10f;
     public LayerMask obstacleMask;
 
-    [Header("Vitesses")]
+    [Header("Réglages Vision/Vitesse")]
+    public float distanceVision = 10f;
     public float vitessePatrouille = 2f;
     public float vitesseChasse = 6f;
-
-    [Header("Patrouille")]
     public float rayonPatrouille = 15f;
 
-    [Header("Sons")]
-    public AudioClip sonAlerte;
+    [Header("Sons de Pas (3D)")]
     public AudioClip sonPas;
-
-    [Header("Audio Distance")]
     public float distanceSonPas = 8f;
     public float intervalPas = 0.5f;
-
-    [Header("Alarme Lumières")]
-    public Light[] alarmLights;
-    public float blinkSpeed = 8f;
-    public float minIntensity = 0f;
-    public float maxIntensity = 6f;
-    public float retourDouxVitesse = 2f; // 🔥 vitesse du retour smooth
+    [Range(0f, 1f)] public float volumePasMax = 0.4f;
 
     private NavMeshAgent agent;
     private AudioSource audioSource;
-    
-    private bool enChasse;
-    private bool alarmeActive;
+    private bool enChasse = false;
     private float footstepTimer;
-
-    private Color[] originalColors;
-    private float[] originalIntensities;
 
     void Start()
     {
@@ -49,17 +31,8 @@ public class EnemyVision360 : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         agent.speed = vitessePatrouille;
-        ConfigurerAudio();
+        ConfigurerAudioLocal();
         ChoisirNouveauPoint();
-
-        originalColors = new Color[alarmLights.Length];
-        originalIntensities = new float[alarmLights.Length];
-
-        for (int i = 0; i < alarmLights.Length; i++)
-        {
-            originalColors[i] = alarmLights[i].color;
-            originalIntensities[i] = alarmLights[i].intensity;
-        }
     }
 
     void Update()
@@ -68,151 +41,77 @@ public class EnemyVision360 : MonoBehaviour
 
         if (PeutVoirJoueur())
         {
-            if (!enChasse)
-            {
-                enChasse = true;
-                agent.speed = vitesseChasse;
-                ActiverAlarme();
-            }
+            if (!enChasse) ActiverModeChasse();
 
-            Vector3 targetPos = joueur.position;
-            targetPos.y = transform.position.y;
-            agent.SetDestination(targetPos);
+            agent.SetDestination(joueur.position);
         }
         else
         {
-            if (enChasse)
-            {
-                enChasse = false;
-                agent.speed = vitessePatrouille;
-                DesactiverAlarme();
-                ChoisirNouveauPoint();
-            }
+            if (enChasse) DesactiverModeChasse();
 
             if (!agent.pathPending && agent.remainingDistance < 0.5f)
                 ChoisirNouveauPoint();
         }
 
         GererPas();
-        GererLumieres();
     }
 
     bool PeutVoirJoueur()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, joueur.position);
+        float dist = Vector3.Distance(transform.position, joueur.position);
+        if (dist > distanceVision) return false;
 
-        if (distanceToPlayer > distanceVision)
-            return false;
-
-        Vector3 direction = (joueur.position - transform.position).normalized;
-
-        if (Physics.Raycast(transform.position + Vector3.up, direction, distanceToPlayer, obstacleMask))
-            return false;
-
-        return true;
+        Vector3 dir = (joueur.position - transform.position).normalized;
+        return !Physics.Raycast(transform.position + Vector3.up, dir, dist, obstacleMask);
     }
 
-    void ActiverAlarme()
+    void ActiverModeChasse()
     {
-        alarmeActive = true;
-
-        if (sonAlerte != null)
-        {
-            audioSource.clip = sonAlerte;
-            audioSource.loop = true;
-            audioSource.Play();
-        }
+        enChasse = true;
+        agent.speed = vitesseChasse;
+        if (AlarmLightManager.Instance != null)
+            AlarmLightManager.Instance.StartAlarm();
     }
 
-    void DesactiverAlarme()
+    void DesactiverModeChasse()
     {
-        alarmeActive = false;
-        audioSource.Stop();
-    }
+        enChasse = false;
+        agent.speed = vitessePatrouille;
+        if (AlarmLightManager.Instance != null)
+            AlarmLightManager.Instance.StopAlarm();
 
-    void GererLumieres()
-    {
-        for (int i = 0; i < alarmLights.Length; i++)
-        {
-            if (alarmeActive)
-            {
-                float intensity = Mathf.Lerp(
-                    minIntensity,
-                    maxIntensity,
-                    Mathf.PingPong(Time.time * blinkSpeed, 1)
-                );
-
-                alarmLights[i].color = Color.red;
-                alarmLights[i].intensity = intensity;
-            }
-            else
-            {
-                // 🔥 RETOUR DOUX
-                alarmLights[i].color = Color.Lerp(
-                    alarmLights[i].color,
-                    originalColors[i],
-                    Time.deltaTime * retourDouxVitesse
-                );
-
-                alarmLights[i].intensity = Mathf.Lerp(
-                    alarmLights[i].intensity,
-                    originalIntensities[i],
-                    Time.deltaTime * retourDouxVitesse
-                );
-            }
-        }
+        ChoisirNouveauPoint();
     }
 
     void ChoisirNouveauPoint()
     {
-        Vector3 randomDirection = Random.insideUnitSphere * rayonPatrouille;
-        randomDirection += transform.position;
-
+        Vector3 randDir = Random.insideUnitSphere * rayonPatrouille + transform.position;
         NavMeshHit hit;
-
-        if (NavMesh.SamplePosition(randomDirection, out hit, rayonPatrouille, NavMesh.AllAreas))
-        {
+        if (NavMesh.SamplePosition(randDir, out hit, rayonPatrouille, NavMesh.AllAreas))
             agent.SetDestination(hit.position);
-        }
     }
 
     void GererPas()
     {
-        if (joueur == null) return;
+        if (agent.velocity.magnitude < 0.2f) return;
 
-        float distance = Vector3.Distance(transform.position, joueur.position);
-
-        if (distance > distanceSonPas)
-        {
-            footstepTimer = 0f;
-            return;
-        }
-
-        if (agent.velocity.magnitude < 0.2f)
-            return;
+        float dist = Vector3.Distance(transform.position, joueur.position);
+        if (dist > distanceSonPas) return;
 
         footstepTimer += Time.deltaTime;
-
         if (footstepTimer >= intervalPas)
         {
-            if (sonPas != null)
-            {
-                float volume = 1f - (distance / distanceSonPas);
-                volume = Mathf.Clamp01(volume);
-                audioSource.PlayOneShot(sonPas, volume);
-            }
-
+            float vol = (1f - (dist / distanceSonPas)) * volumePasMax;
+            audioSource.PlayOneShot(sonPas, Mathf.Clamp01(vol));
             footstepTimer = 0f;
         }
     }
 
-    void ConfigurerAudio()
+    void ConfigurerAudioLocal()
     {
-        audioSource.spatialBlend = 1f;
-        audioSource.minDistance = 1.5f;
-        audioSource.maxDistance = distanceSonPas;
-        audioSource.rolloffMode = AudioRolloffMode.Logarithmic;
-        audioSource.dopplerLevel = 0f;
+        audioSource.spatialBlend = 1f; // 3D pour les pas
         audioSource.playOnAwake = false;
+        audioSource.minDistance = 1f;
+        audioSource.maxDistance = distanceSonPas;
     }
 }
