@@ -30,15 +30,25 @@ public class LavaDeath : MonoBehaviour
 
         if (other.transform.root.CompareTag("Player"))
         {
-            StartCoroutine(DeathSequence());
+            // Determine the scene that contains this lava object
+            string sceneNameToReload = gameObject.scene.name;
+
+            if (verboseLogs)
+            {
+                Debug.Log($"[LavaDeath] Active scene: {SceneManager.GetActiveScene().buildIndex} - {SceneManager.GetActiveScene().name}");
+                Debug.Log($"[LavaDeath] Lava object scene: {gameObject.scene.buildIndex} - {sceneNameToReload}");
+            }
+
+            StartCoroutine(DeathSequence(sceneNameToReload));
         }
     }
 
-    private IEnumerator DeathSequence()
+    // Pass the scene name to reload so we don't depend on the active scene or build order
+    private IEnumerator DeathSequence(string sceneName)
     {
         isDying = true;
 
-        if (verboseLogs) Debug.Log($"[LavaDeath] DeathSequence start at {Time.realtimeSinceStartup:F3}s");
+        if (verboseLogs) Debug.Log($"[LavaDeath] DeathSequence start at {Time.realtimeSinceStartup:F3}s (reload '{sceneName}')");
 
         // Play sounds immediately in real time
         PlaySoundSafe(burnSound);
@@ -64,7 +74,8 @@ public class LavaDeath : MonoBehaviour
         Time.timeScale = 1f;
         if (verboseLogs) Debug.Log($"[LavaDeath] Restoring time and reloading at {Time.realtimeSinceStartup:F3}s");
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        // Reload the scene by name (more robust if build order is unexpected)
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
     /// <summary>
