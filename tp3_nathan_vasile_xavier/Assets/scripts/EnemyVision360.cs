@@ -35,7 +35,7 @@ public class EnemyVision360 : MonoBehaviour
 
     private NavMeshAgent agent;
     private AudioSource audioSource;
-
+    
     private bool enChasse;
     private bool alarmeActive;
     private float footstepTimer;
