@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class AlarmLightManager : MonoBehaviour
 {
@@ -9,17 +10,24 @@ public class AlarmLightManager : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip alarmSound;
 
-    [Header("Paramètres Clignotement")]
-    public float blinkSpeed = 6f;
-    public float minIntensity = 0f;
-    public float maxIntensity = 6f;
+    [Header("Paramètres Alarme Intense")]
+    public float blinkSpeed = 4f;
+    public float maxIntensityAlerte = 6f;
+    public float minIntensityAlerte = 0f;
+
+    [Range(1f, 3f)]
+    public float boostLuminositeRouge = 1.8f; // Multiplicateur pour compenser la noirceur du rouge
+
+    [Header("🔥 Nouveau : Boost de Portée")]
+    public float boostRangeRouge = 1.1f; // +10% de portée pendant l'alarme
 
     private bool alarmActive = false;
     private int guardsDetectingPlayer = 0;
 
-    // Tableaux pour stocker l'état initial
     private float[] originalIntensities;
+    private float[] originalRanges; // On ajoute la sauvegarde du Range
     private Color[] originalColors;
+    private Coroutine stopRoutine;
 
     void Awake()
     {
@@ -27,17 +35,16 @@ public class AlarmLightManager : MonoBehaviour
         else Destroy(gameObject);
 
         if (alarmLights == null || alarmLights.Length == 0)
-        {
             alarmLights = GetComponentsInChildren<Light>();
-        }
 
-        // On sauvegarde TOUT : intensité ET couleur
         originalIntensities = new float[alarmLights.Length];
+        originalRanges = new float[alarmLights.Length]; // Initialisation
         originalColors = new Color[alarmLights.Length];
 
         for (int i = 0; i < alarmLights.Length; i++)
         {
             originalIntensities[i] = alarmLights[i].intensity;
+            originalRanges[i] = alarmLights[i].range; // Sauvegarde du range initial
             originalColors[i] = alarmLights[i].color;
         }
     }
@@ -46,31 +53,32 @@ public class AlarmLightManager : MonoBehaviour
     {
         if (!alarmActive) return;
 
-        float intensity = Mathf.Lerp(
-            minIntensity,
-            maxIntensity,
-            Mathf.PingPong(Time.time * blinkSpeed, 1)
-        );
+        float t = Mathf.PingPong(Time.time * blinkSpeed, 1);
 
-        foreach (Light l in alarmLights)
+        // Intensité avec ton boost de 1.8
+        float intensity = Mathf.Lerp(minIntensityAlerte, maxIntensityAlerte * boostLuminositeRouge, t);
+
+        for (int i = 0; i < alarmLights.Length; i++)
         {
-            l.color = Color.red; // Force le rouge pendant l'alerte
-            l.intensity = intensity;
+            alarmLights[i].color = Color.red;
+            alarmLights[i].intensity = intensity;
+
+            // 🔥 Application du boost de 10% sur la portée
+            alarmLights[i].range = Mathf.Lerp(originalRanges[i], originalRanges[i] * boostRangeRouge, t);
         }
     }
 
     public void StartAlarm()
     {
         guardsDetectingPlayer++;
-
         if (alarmActive) return;
+        if (stopRoutine != null) StopCoroutine(stopRoutine);
         alarmActive = true;
 
         if (audioSource != null && alarmSound != null)
         {
             audioSource.clip = alarmSound;
             audioSource.loop = true;
-            audioSource.spatialBlend = 0f;
             audioSource.Play();
         }
     }
@@ -78,20 +86,51 @@ public class AlarmLightManager : MonoBehaviour
     public void StopAlarm()
     {
         guardsDetectingPlayer--;
-
         if (guardsDetectingPlayer <= 0)
         {
             guardsDetectingPlayer = 0;
-            alarmActive = false;
+            if (alarmActive)
+            {
+                alarmActive = false;
+                if (audioSource != null) audioSource.Stop();
+                if (stopRoutine != null) StopCoroutine(stopRoutine);
+                stopRoutine = StartCoroutine(FadeToOriginal(2f));
+            }
+        }
+    }
 
-            if (audioSource != null) audioSource.Stop();
+    private IEnumerator FadeToOriginal(float duration)
+    {
+        float elapsed = 0f;
+        float[] intensitiesAtStop = new float[alarmLights.Length];
+        float[] rangesAtStop = new float[alarmLights.Length]; // Sauvegarde range à l'arrêt
 
-            // RÉINITIALISATION COMPLÈTE
+        for (int i = 0; i < alarmLights.Length; i++)
+        {
+            intensitiesAtStop[i] = alarmLights[i].intensity;
+            rangesAtStop[i] = alarmLights[i].range;
+        }
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float p = elapsed / duration;
+
             for (int i = 0; i < alarmLights.Length; i++)
             {
-                alarmLights[i].intensity = originalIntensities[i]; // Remet l'intensité de base
-                alarmLights[i].color = originalColors[i];         // Remet la couleur de base (blanc/jaune)
+                alarmLights[i].color = Color.Lerp(Color.red, originalColors[i], p);
+                alarmLights[i].intensity = Mathf.Lerp(intensitiesAtStop[i], originalIntensities[i], p);
+                // Retour fluide du Range
+                alarmLights[i].range = Mathf.Lerp(rangesAtStop[i], originalRanges[i], p);
             }
+            yield return null;
+        }
+
+        for (int i = 0; i < alarmLights.Length; i++)
+        {
+            alarmLights[i].color = originalColors[i];
+            alarmLights[i].intensity = originalIntensities[i];
+            alarmLights[i].range = originalRanges[i];
         }
     }
 }
