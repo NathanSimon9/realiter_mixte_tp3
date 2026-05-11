@@ -15,6 +15,10 @@ public class LavaDeath : MonoBehaviour
     [SerializeField] private AudioClip burnSound;
     [SerializeField] private AudioClip deathSound;
 
+    [Header("Scene")]
+    [Tooltip("Scene name to reload when the player dies. If empty, the scene that contains this lava object will be used.")]
+    [SerializeField] private string sceneToReload = "scene_pont";
+
     [Header("Timing")]
     [Tooltip("Extra real-time delay after fade before reloading the scene.")]
     [SerializeField] private float postFadeDelay = 0.3f;
@@ -30,13 +34,16 @@ public class LavaDeath : MonoBehaviour
 
         if (other.transform.root.CompareTag("Player"))
         {
-            // Determine the scene that contains this lava object
-            string sceneNameToReload = gameObject.scene.name;
+            // Determine which scene name to reload: inspector override or the scene that contains this lava object
+            string sceneNameToReload = string.IsNullOrEmpty(sceneToReload) ? gameObject.scene.name : sceneToReload;
 
             if (verboseLogs)
             {
                 Debug.Log($"[LavaDeath] Active scene: {SceneManager.GetActiveScene().buildIndex} - {SceneManager.GetActiveScene().name}");
-                Debug.Log($"[LavaDeath] Lava object scene: {gameObject.scene.buildIndex} - {sceneNameToReload}");
+                Debug.Log($"[LavaDeath] Lava object scene: {gameObject.scene.buildIndex} - {gameObject.scene.name}");
+                Debug.Log($"[LavaDeath] Chosen scene to reload: {sceneNameToReload}");
+                if (sceneNameToReload != gameObject.scene.name)
+                    Debug.Log($"[LavaDeath] Using inspector override 'sceneToReload' instead of lava object's scene.");
             }
 
             StartCoroutine(DeathSequence(sceneNameToReload));
@@ -74,7 +81,7 @@ public class LavaDeath : MonoBehaviour
         Time.timeScale = 1f;
         if (verboseLogs) Debug.Log($"[LavaDeath] Restoring time and reloading at {Time.realtimeSinceStartup:F3}s");
 
-        // Reload the scene by name (more robust if build order is unexpected)
+        // Reload the scene by name (ensure the scene name is added to Build Settings)
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
