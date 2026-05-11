@@ -7223,7 +7223,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Mettez  la coupe sur la porte en bois pour acceder au niveau suivant
+  m_text: Mettez  la clef sur la porte en bois pour acceder au niveau suivant
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -15654,6 +15654,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carteCanvas: {fileID: 547732487}
+  sonCarte: {fileID: 8300000, guid: d246f1a0d795ab14794f785cf4fd9acc, type: 3}
+  sonCarteVolume: 1
   carteTag: carte
   playerTag: Player
   hideOnStart: 1
@@ -38332,7 +38334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -51205,7 +51207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 413540, guid: 06ddc49c92c02ad45977687a67899e90, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.077
+      value: -0.019
       objectReference: {fileID: 0}
     - target: {fileID: 420398, guid: 06ddc49c92c02ad45977687a67899e90, type: 3}
       propertyPath: m_LocalPosition.x
