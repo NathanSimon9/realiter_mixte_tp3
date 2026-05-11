@@ -18713,7 +18713,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -18767,7 +18767,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 1817009115}
   fadeDuration: 0.5
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 431917287}
   burnSound: {fileID: 8300000, guid: 532ab366d503ace4bbe66708f869f774, type: 3}
   deathSound: {fileID: 8300000, guid: b0c3a5017804ad245bfec9875e3ff51f, type: 3}
   postFadeDelay: 0.3
@@ -18898,7 +18898,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -77655,7 +77655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
