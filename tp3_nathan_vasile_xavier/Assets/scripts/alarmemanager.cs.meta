@@ -5,7 +5,7 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - audioSource: {instanceID: 0}
-  - alarmSound: {fileID: 8300000, guid: d8295a568bd1f5f418f2b21806ce27c2, type: 3}
+  - alarmSound: {fileID: 8300000, guid: 49ac945790d8e9749a61087088f193a6, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

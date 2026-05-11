@@ -3,7 +3,10 @@ guid: cc3761b7d0305384eb61fabcbd49229a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - joueur: {instanceID: 0}
+  - sonAlerte: {fileID: 8300000, guid: 49ac945790d8e9749a61087088f193a6, type: 3}
+  - sonPas: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
