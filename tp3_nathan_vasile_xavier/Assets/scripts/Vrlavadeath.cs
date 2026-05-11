@@ -72,8 +72,8 @@ public class VRLavaDeath : MonoBehaviour
         // Remettre le temps à la normale pour la scène suivante
         Time.timeScale = 1f;
 
-        // Chargement de la scène à l'index 3
-        Debug.Log("🔄 Chargement de l'index 3.");
-        SceneManager.LoadScene(3);
+        // Rechargement de la scène actuelle
+        Debug.Log("🔄 Rechargement de la scène : " + SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

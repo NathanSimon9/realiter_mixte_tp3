@@ -46219,18 +46219,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpButton:
-    m_UseReference: 1
+    m_UseReference: 0
     m_Action:
       m_Name: Jump Button
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 2fe45c5b-19ae-4bad-9fd9-2b0b79655806
+      m_Id: 46bc7b31-fbff-4645-90c8-9eddfc2b79c1
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -2320824253671969224, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  jumpHeight: 1.5
+    m_Reference: {fileID: 0}
+  jumpHeight: 3
   joueur: {fileID: 1023361803}
   groundLayer:
     serializedVersion: 2
