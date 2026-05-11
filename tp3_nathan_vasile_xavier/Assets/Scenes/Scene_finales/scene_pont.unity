@@ -18762,12 +18762,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 431917285}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb0b553b4f06f8a409f4c29db441a5bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 42aa971dc921b124eb179d54ab86f2df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 1817009115}
   fadeDuration: 0.5
-  audioSource: {fileID: 431917287}
+  audioSource: {fileID: 0}
   burnSound: {fileID: 8300000, guid: 532ab366d503ace4bbe66708f869f774, type: 3}
   deathSound: {fileID: 8300000, guid: b0c3a5017804ad245bfec9875e3ff51f, type: 3}
   postFadeDelay: 0.3
