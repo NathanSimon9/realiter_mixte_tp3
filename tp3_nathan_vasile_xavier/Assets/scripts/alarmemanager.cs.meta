@@ -3,7 +3,9 @@ guid: 6851348e80b3a434797583b5fc7ffd8a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - audioSource: {instanceID: 0}
+  - alarmSound: {fileID: 8300000, guid: d8295a568bd1f5f418f2b21806ce27c2, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
