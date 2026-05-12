@@ -80,6 +80,7 @@ public class VRTrapDeath : MonoBehaviour
 
         // Remettre le temps à la normale et charger l'index 3
         Time.timeScale = 1f;
-        SceneManager.LoadScene(3);
+        Debug.Log("🔄 Rechargement de la scène : " + SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
